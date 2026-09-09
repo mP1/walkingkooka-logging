@@ -19,13 +19,26 @@ package walkingkooka.logging;
 
 public enum LoggingLevel {
 
-    DEBUG,
+    DEBUG(1),
 
-    INFO,
+    INFO(2),
 
-    WARN,
+    WARN(3),
 
-    ERROR,
+    ERROR(4),
 
-    NONE;
+    NONE(5);
+
+    LoggingLevel(final int value) {
+        this.value = value;
+    }
+
+    /**
+     * Returns true if the given {@link LoggingLevel} is enabled.
+     */
+    public boolean isEnabled(final LoggingLevel level) {
+        return NONE != this && this.value == level.value;
+    }
+
+    private final int value;
 }

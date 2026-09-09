@@ -17,9 +17,64 @@
 
 package walkingkooka.logging;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.PublicClassTesting;
 
 public final class LoggingLevelTest implements PublicClassTesting<LoggingLevel> {
+
+    @Test
+    public void testIsEnabledDebugWithDebug() {
+        this.isEnabledAndCHeck(
+            LoggingLevel.DEBUG
+        );
+    }
+
+    @Test
+    public void testIsEnabledInfoWithDebug() {
+        this.isEnabledAndCHeck(
+            LoggingLevel.INFO,
+            LoggingLevel.DEBUG,
+            false
+        );
+    }
+
+    @Test
+    public void testIsEnabledNoneWithDebug() {
+        this.isEnabledAndCHeck(
+            LoggingLevel.NONE,
+            LoggingLevel.DEBUG,
+            false
+        );
+    }
+
+    @Test
+    public void testIsEnabledNoneWithNone() {
+        this.isEnabledAndCHeck(
+            LoggingLevel.NONE,
+            LoggingLevel.NONE,
+            false
+        );
+    }
+
+    private void isEnabledAndCHeck(final LoggingLevel level) {
+        this.isEnabledAndCHeck(
+            level,
+            level,
+            true
+        );
+    }
+
+    private void isEnabledAndCHeck(final LoggingLevel level,
+                                   final LoggingLevel test,
+                                   final boolean expected) {
+        this.checkEquals(
+            expected,
+            level.isEnabled(test),
+            () -> level + " isEnabled " + test
+        );
+    }
+
+    // class............................................................................................................
 
     @Override
     public Class<LoggingLevel> type() {
