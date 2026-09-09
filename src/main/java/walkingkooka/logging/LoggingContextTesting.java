@@ -21,6 +21,16 @@ import walkingkooka.test.Testing;
 
 public interface LoggingContextTesting extends Testing {
 
+    default void isLoggingEnabledAndCheck(final LoggingContext context,
+                                          final LoggingLevel loggingLevel,
+                                          final boolean expected) {
+        this.checkEquals(
+            expected,
+            context.isLoggingEnabled(loggingLevel),
+            context::toString
+        );
+    }
+
     default void loggingLevelAndCheck(final LoggingContext context,
                                       final LoggingLevel expected) {
         this.checkEquals(

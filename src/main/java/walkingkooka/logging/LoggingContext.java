@@ -58,5 +58,7 @@ public interface LoggingContext extends Context {
 
     boolean isNoneEnabled();
 
+    boolean isLoggingEnabled(final LoggingLevel level);
+
     LoggingLevel loggingLevel();
 }
