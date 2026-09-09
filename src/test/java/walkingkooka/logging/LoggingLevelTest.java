@@ -39,6 +39,15 @@ public final class LoggingLevelTest implements PublicClassTesting<LoggingLevel> 
     }
 
     @Test
+    public void testIsEnabledInfoWithWarn() {
+        this.isEnabledAndCHeck(
+            LoggingLevel.INFO,
+            LoggingLevel.WARN,
+            true
+        );
+    }
+
+    @Test
     public void testIsEnabledNoneWithDebug() {
         this.isEnabledAndCHeck(
             LoggingLevel.NONE,

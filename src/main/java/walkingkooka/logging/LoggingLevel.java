@@ -37,7 +37,7 @@ public enum LoggingLevel {
      * Returns true if the given {@link LoggingLevel} is enabled.
      */
     public boolean isEnabled(final LoggingLevel level) {
-        return this.value == level.value;
+        return this.value <= level.value;
     }
 
     private final int value;
