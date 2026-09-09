@@ -41,4 +41,9 @@ public interface LoggingContextTesting2<C extends LoggingContext> extends Contex
             expected
         );
     }
+
+    @Override
+    default String typeNameSuffix() {
+        return LoggingContext.class.getSimpleName();
+    }
 }
