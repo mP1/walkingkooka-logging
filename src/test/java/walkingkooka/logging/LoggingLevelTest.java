@@ -50,9 +50,7 @@ public final class LoggingLevelTest implements PublicClassTesting<LoggingLevel> 
     @Test
     public void testIsEnabledNoneWithNone() {
         this.isEnabledAndCHeck(
-            LoggingLevel.NONE,
-            LoggingLevel.NONE,
-            false
+            LoggingLevel.NONE
         );
     }
 
