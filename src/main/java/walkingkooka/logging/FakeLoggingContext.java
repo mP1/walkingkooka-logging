@@ -74,6 +74,13 @@ public class FakeLoggingContext implements LoggingContext {
     }
 
     @Override
+    public void log(final LoggingLevel level,
+                    final String message,
+                    final Throwable throwable) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean isDebugEnabled() {
         throw new UnsupportedOperationException();
     }

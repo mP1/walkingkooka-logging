@@ -44,6 +44,10 @@ public interface LoggingContext extends Context {
     void log(final LoggingLevel level,
              final String message);
 
+    void log(final LoggingLevel level,
+             final String message,
+             final Throwable throwable);
+
     boolean isDebugEnabled();
 
     boolean isInfoEnabled();
