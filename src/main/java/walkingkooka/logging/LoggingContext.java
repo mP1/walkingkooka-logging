@@ -19,7 +19,8 @@ package walkingkooka.logging;
 
 import walkingkooka.Context;
 
-public interface LoggingContext extends Context {
+public interface LoggingContext extends Context,
+    HasLoggingLevel {
 
     void debug(final String message);
 
@@ -59,6 +60,4 @@ public interface LoggingContext extends Context {
     boolean isNoneEnabled();
 
     boolean isLoggingEnabled(final LoggingLevel level);
-
-    LoggingLevel loggingLevel();
 }
