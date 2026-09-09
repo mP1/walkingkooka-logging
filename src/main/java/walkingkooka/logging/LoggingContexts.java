@@ -25,6 +25,13 @@ import walkingkooka.reflect.PublicStaticHelper;
 public final class LoggingContexts implements PublicStaticHelper {
 
     /**
+     * {@link FakeLoggingContext}
+     */
+    public static FakeLoggingContext fake() {
+        return new FakeLoggingContext();
+    }
+
+    /**
      * Stop creation
      */
     private LoggingContexts() {
