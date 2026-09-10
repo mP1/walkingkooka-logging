@@ -19,6 +19,8 @@ package walkingkooka.logging;
 
 public interface LoggingContextTesting extends HasLoggingLevelTesting {
 
+    LoggingContext LOGGING_CONTEXT = LoggingContexts.nullLoggingContext();
+
     default void isLoggingEnabledAndCheck(final LoggingContext context,
                                           final LoggingLevel loggingLevel,
                                           final boolean expected) {
