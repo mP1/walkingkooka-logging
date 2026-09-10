@@ -17,39 +17,29 @@
 
 package walkingkooka.logging;
 
-import walkingkooka.reflect.PublicStaticHelper;
-import walkingkooka.text.printer.Printer;
+import org.junit.jupiter.api.Test;
 
-/**
- * A collection of {@link CanLog}.
- */
-public final class CanLogs implements PublicStaticHelper {
+public final class CanLogNullTest implements CanLogTesting2<CanLogNull> {
 
-    /**
-     * {@link FakeCanLog}
-     */
-    public static FakeCanLog fake() {
-        return new FakeCanLog();
+    @Test
+    public void testLog() {
+        this.createCanLog()
+            .log(
+                LoggingLevel.ERROR,
+                "message123",
+                new RuntimeException()
+            );
     }
 
-    /**
-     * {@link CanLogNull}
-     */
-    public static CanLog nullCanLog() {
+    @Override
+    public CanLogNull createCanLog() {
         return CanLogNull.INSTANCE;
     }
 
-    /**
-     * {@link CanLogPrinter}
-     */
-    public static CanLog printer(final Printer printer) {
-        return CanLogPrinter.with(printer);
-    }
+    // class............................................................................................................
 
-    /**
-     * Stop creation
-     */
-    private CanLogs() {
-        throw new UnsupportedOperationException();
+    @Override
+    public Class<CanLogNull> type() {
+        return CanLogNull.class;
     }
 }
