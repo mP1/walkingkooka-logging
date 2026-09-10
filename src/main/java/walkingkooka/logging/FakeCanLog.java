@@ -17,24 +17,12 @@
 
 package walkingkooka.logging;
 
-import walkingkooka.reflect.PublicStaticHelper;
+public class FakeCanLog implements CanLog {
 
-/**
- * A collection of {@link CanLog}.
- */
-public final class CanLogs implements PublicStaticHelper {
-
-    /**
-     * {@link FakeCanLog}
-     */
-    public static FakeCanLog fake() {
-        return new FakeCanLog();
-    }
-
-    /**
-     * Stop creation
-     */
-    private CanLogs() {
+    @Override
+    public void log(final LoggingLevel level,
+                    final String message,
+                    final Throwable throwable) {
         throw new UnsupportedOperationException();
     }
 }
