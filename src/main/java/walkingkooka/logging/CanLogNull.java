@@ -17,39 +17,28 @@
 
 package walkingkooka.logging;
 
-import walkingkooka.reflect.PublicStaticHelper;
-import walkingkooka.text.printer.Printer;
+import java.util.Objects;
 
-/**
- * A collection of {@link CanLog}.
- */
-public final class CanLogs implements PublicStaticHelper {
+final class CanLogNull implements CanLog {
 
     /**
-     * {@link FakeCanLog}
+     * Singleton
      */
-    public static FakeCanLog fake() {
-        return new FakeCanLog();
+    final static CanLogNull INSTANCE = new CanLogNull();
+
+    private CanLogNull() {
+        super();
     }
 
-    /**
-     * {@link CanLogNull}
-     */
-    public static CanLog nullCanLog() {
-        return CanLogNull.INSTANCE;
+    @Override
+    public void log(final LoggingLevel level,
+                    final String message,
+                    final Throwable throwable) {
+        Objects.requireNonNull(level, "loggingLevel");
     }
 
-    /**
-     * {@link CanLogPrinter}
-     */
-    public static CanLog printer(final Printer printer) {
-        return CanLogPrinter.with(printer);
-    }
-
-    /**
-     * Stop creation
-     */
-    private CanLogs() {
-        throw new UnsupportedOperationException();
+    @Override
+    public String toString() {
+        return "nul";
     }
 }
