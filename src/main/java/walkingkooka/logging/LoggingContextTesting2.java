@@ -20,6 +20,7 @@ package walkingkooka.logging;
 import walkingkooka.ContextTesting;
 
 public interface LoggingContextTesting2<C extends LoggingContext> extends ContextTesting<C>,
+    CanLogTesting2<C>,
     LoggingContextTesting {
 
     default void isLoggingEnabledAndCheck(final LoggingLevel loggingLevel,
@@ -41,6 +42,15 @@ public interface LoggingContextTesting2<C extends LoggingContext> extends Contex
             expected
         );
     }
+
+    // CanLog...........................................................................................................
+
+    @Override
+    default C createCanLog() {
+        return this.createCanLog();
+    }
+
+    // class............................................................................................................
 
     @Override
     default String typeNameSuffix() {
