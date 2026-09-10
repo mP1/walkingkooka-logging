@@ -18,7 +18,6 @@
 package walkingkooka.logging;
 
 import walkingkooka.reflect.PublicStaticHelper;
-import walkingkooka.text.printer.Printer;
 
 /**
  * A collection of {@link LoggingContext}.
@@ -48,17 +47,6 @@ public final class LoggingContexts implements PublicStaticHelper {
      */
     public static LoggingContext nullLoggingContext() {
         return LoggingContextNull.INSTANCE;
-    }
-
-    /**
-     * {@link LoggingContextPrinter}
-     */
-    public static LoggingContext printer(final HasLoggingLevel loggingLevel,
-                                         final Printer printer) {
-        return LoggingContextPrinter.with(
-            loggingLevel,
-            printer
-        );
     }
 
     /**
