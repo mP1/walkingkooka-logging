@@ -19,7 +19,9 @@ package test;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import walkingkooka.logging.CanLogs;
 import walkingkooka.logging.LoggingContexts;
+import walkingkooka.logging.LoggingLevel;
 
 public class TestGwtTest extends GWTTestCase {
 
@@ -36,7 +38,9 @@ public class TestGwtTest extends GWTTestCase {
     }
 
     public void testNullLoggingContext() {
-        LoggingContexts.nullLoggingContext()
-            .error("Hello World 123");
+        LoggingContexts.canLog(
+            () -> LoggingLevel.NONE,
+            CanLogs.nullCanLog()
+        ).error("Hello World 123");
     }
 }

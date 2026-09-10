@@ -22,7 +22,9 @@ import com.google.j2cl.junit.apt.J2clTestInput;
 import org.junit.Assert;
 import org.junit.Test;
 
+import walkingkooka.logging.CanLogs;
 import walkingkooka.logging.LoggingContexts;
+import walkingkooka.logging.LoggingLevel;
 
 @J2clTestInput(JunitTest.class)
 public class JunitTest {
@@ -37,7 +39,9 @@ public class JunitTest {
 
     @Test
     public void testNullLoggingContext() {
-        LoggingContexts.nullLoggingContext()
-            .error("Hello World 123");
+        LoggingContexts.canLog(
+            () -> LoggingLevel.NONE,
+            CanLogs.nullCanLog()
+        ).error("Hello World 123");
     }
 }
