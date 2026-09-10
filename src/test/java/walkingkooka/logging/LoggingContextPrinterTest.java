@@ -18,6 +18,7 @@
 package walkingkooka.logging;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.text.HasLineEndingTesting;
 import walkingkooka.text.printer.Printer;
@@ -29,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class LoggingContextPrinterTest implements LoggingContextTesting2<LoggingContextPrinter>,
     HasLineEndingTesting,
+    HashCodeEqualsDefinedTesting2<LoggingContextPrinter>,
     ToStringTesting<LoggingContextPrinter> {
 
     private final static HasLoggingLevel HAS_LOGGING_LEVEL = () -> LoggingLevel.INFO;
@@ -194,6 +196,33 @@ public final class LoggingContextPrinterTest implements LoggingContextTesting2<L
             HAS_LOGGING_LEVEL,
             printer
         );
+    }
+
+    // hashCode/equals..................................................................................................
+
+    @Test
+    public void testEqualsDifferentLoggingLevel() {
+        this.checkNotEquals(
+            LoggingContextPrinter.with(
+                () -> LoggingLevel.NONE,
+                PRINTER
+            )
+        );
+    }
+
+    @Test
+    public void testEqualsDifferentPrinter() {
+        this.checkNotEquals(
+            LoggingContextPrinter.with(
+                HAS_LOGGING_LEVEL,
+                Printers.fake()
+            )
+        );
+    }
+
+    @Override
+    public LoggingContextPrinter createObject() {
+        return this.createContext();
     }
 
     // toString.........................................................................................................
