@@ -26,6 +26,17 @@ import walkingkooka.text.printer.Printer;
 public final class LoggingContexts implements PublicStaticHelper {
 
     /**
+     * {@link LoggingContextCanLog}
+     */
+    public static LoggingContext canLog(final HasLoggingLevel loggingLevel,
+                                        final CanLog canLog) {
+        return LoggingContextCanLog.with(
+            loggingLevel,
+            canLog
+        );
+    }
+
+    /**
      * {@link FakeLoggingContext}
      */
     public static FakeLoggingContext fake() {
