@@ -47,7 +47,7 @@ public interface LoggingContextTesting2<C extends LoggingContext> extends Contex
 
     @Override
     default C createCanLog() {
-        return this.createCanLog();
+        return this.createContext();
     }
 
     // class............................................................................................................
