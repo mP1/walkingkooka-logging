@@ -15,24 +15,16 @@
  *
  */
 
-package test;
+package walkingkooka.logging.sample;
 
-
-import com.google.j2cl.junit.apt.J2clTestInput;
-import org.junit.Assert;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import walkingkooka.logging.LoggingContexts;
 
-@J2clTestInput(JunitTest.class)
-public class JunitTest {
+public final class Sample {
 
-    @Test
-    public void testTrue() {
-        Assert.assertEquals(
-            1,
-            1
-        );
+    public static void main(final String[] args) {
+        final Sample sample = new Sample();
+        sample.testNullLoggingContext();
     }
 
     @Test
