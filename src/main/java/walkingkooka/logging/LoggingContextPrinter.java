@@ -17,6 +17,7 @@
 
 package walkingkooka.logging;
 
+import walkingkooka.Cast;
 import walkingkooka.text.printer.Printer;
 
 import java.io.PrintWriter;
@@ -187,6 +188,26 @@ final class LoggingContextPrinter implements LoggingContext {
     private HasLoggingLevel loggingLevel;
 
     // Object...........................................................................................................
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            this.printer,
+            this.loggingLevel
+        );
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        return this == other ||
+            other instanceof LoggingContextPrinter &&
+                this.equals0(Cast.to(other));
+    }
+
+    private boolean equals0(final LoggingContextPrinter other) {
+        return this.printer.equals(other.printer) &&
+            this.loggingLevel.equals(other.loggingLevel);
+    }
 
     @Override
     public String toString() {
