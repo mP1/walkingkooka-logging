@@ -20,6 +20,7 @@ package walkingkooka.logging;
 import walkingkooka.Context;
 
 public interface LoggingContext extends Context,
+    CanLog,
     HasLoggingLevel {
 
     void debug(final String message);
@@ -41,13 +42,6 @@ public interface LoggingContext extends Context,
 
     void error(final String message,
                final Throwable throwable);
-
-    void log(final LoggingLevel level,
-             final String message);
-
-    void log(final LoggingLevel level,
-             final String message,
-             final Throwable throwable);
 
     boolean isDebugEnabled();
 
