@@ -17,6 +17,8 @@
 
 package walkingkooka.logging;
 
+import java.util.Objects;
+
 /**
  * A {@link LoggingContext} that logs nothing and ignores all messages.
  */
@@ -81,7 +83,7 @@ final class LoggingContextNull implements LoggingContext {
     public void log(final LoggingLevel level,
                     final String message,
                     final Throwable throwable) {
-        //
+        Objects.requireNonNull(level, "level");
     }
 
     @Override

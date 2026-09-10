@@ -17,10 +17,26 @@
 
 package walkingkooka.logging;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.PackagePrivateClassTesting;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface CanLogTesting2<C extends CanLog> extends CanLogTesting,
     PackagePrivateClassTesting<C> {
+
+    @Test
+    default void testLogWithNullLoggingLevelFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createCanLog()
+                .log(
+                    null, // LoggingLevel
+                    "message123",
+                    new RuntimeException()
+                )
+        );
+    }
 
     C createCanLog();
 }
