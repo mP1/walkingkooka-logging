@@ -43,13 +43,6 @@ public final class LoggingContexts implements PublicStaticHelper {
     }
 
     /**
-     * {@link LoggingContextNull}
-     */
-    public static LoggingContext nullLoggingContext() {
-        return LoggingContextNull.INSTANCE;
-    }
-
-    /**
      * Stop creation
      */
     private LoggingContexts() {

@@ -20,7 +20,10 @@ package walkingkooka.logging;
 public interface LoggingContextTesting extends CanLogTesting,
     HasLoggingLevelTesting {
 
-    LoggingContext LOGGING_CONTEXT = LoggingContexts.nullLoggingContext();
+    LoggingContext LOGGING_CONTEXT = LoggingContexts.canLog(
+        () -> LoggingLevel.NONE,
+        CanLogs.nullCanLog()
+    );
 
     default void isLoggingEnabledAndCheck(final LoggingContext context,
                                           final LoggingLevel loggingLevel,

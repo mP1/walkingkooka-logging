@@ -45,7 +45,10 @@ public final class LoggingContextDelegatorTest implements LoggingContextTesting2
 
         @Override
         public LoggingContext loggingContext() {
-            return LoggingContexts.nullLoggingContext();
+            return LoggingContexts.canLog(
+                () -> LoggingLevel.NONE,
+                CanLogs.nullCanLog()
+            );
         }
 
         @Override

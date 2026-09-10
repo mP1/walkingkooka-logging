@@ -18,7 +18,9 @@
 package walkingkooka.logging.sample;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.logging.CanLogs;
 import walkingkooka.logging.LoggingContexts;
+import walkingkooka.logging.LoggingLevel;
 
 public final class Sample {
 
@@ -29,7 +31,9 @@ public final class Sample {
 
     @Test
     public void testNullLoggingContext() {
-        LoggingContexts.nullLoggingContext()
-            .error("Hello World 123");
+        LoggingContexts.canLog(
+                () -> LoggingLevel.NONE,
+                CanLogs.nullCanLog()
+            ).error("Hello World 123");
     }
 }
