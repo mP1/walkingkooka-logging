@@ -18,6 +18,7 @@
 package walkingkooka.logging;
 
 import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.text.printer.Printer;
 
 /**
  * A collection of {@link CanLog}.
@@ -29,6 +30,13 @@ public final class CanLogs implements PublicStaticHelper {
      */
     public static FakeCanLog fake() {
         return new FakeCanLog();
+    }
+
+    /**
+     * {@link CanLogPrinter}
+     */
+    public static CanLog printer(final Printer printer) {
+        return CanLogPrinter.with(printer);
     }
 
     /**
