@@ -17,9 +17,20 @@
 
 package walkingkooka.logging;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.PublicClassTesting;
 
 public final class HasLoggingLevelTestingTest implements PublicClassTesting<HasLoggingLevelTesting> {
+
+    @Test
+    public void testLoggingLevelConstants() {
+        this.checkNotEquals(
+            HasLoggingLevelTesting.LOGGING_LEVEL,
+            HasLoggingLevelTesting.DIFFERENT_LOGGING_LEVEL
+        );
+    }
+
+    // class............................................................................................................
 
     @Override
     public Class<HasLoggingLevelTesting> type() {

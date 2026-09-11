@@ -21,6 +21,10 @@ import walkingkooka.test.Testing;
 
 public interface HasLoggingLevelTesting extends Testing {
 
+    LoggingLevel LOGGING_LEVEL = LoggingLevel.NONE;
+
+    LoggingLevel DIFFERENT_LOGGING_LEVEL = LoggingLevel.DEBUG;
+
     default void loggingLevelAndCheck(final HasLoggingLevel has,
                                       final LoggingLevel expected) {
         this.checkEquals(
