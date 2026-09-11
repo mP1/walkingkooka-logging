@@ -20,4 +20,6 @@ package walkingkooka.logging;
 import walkingkooka.test.Testing;
 
 public interface CanLogTesting extends Testing {
+
+    CanLog CAN_LOG = CanLogs.nullCanLog();
 }

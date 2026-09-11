@@ -22,7 +22,7 @@ public interface LoggingContextTesting extends CanLogTesting,
 
     LoggingContext LOGGING_CONTEXT = LoggingContexts.canLog(
         () -> LoggingLevel.NONE,
-        CanLogs.nullCanLog()
+        CAN_LOG
     );
 
     default void isLoggingEnabledAndCheck(final LoggingContext context,
