@@ -21,6 +21,8 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.logging.CanLogs;
 import walkingkooka.logging.LoggingContexts;
 import walkingkooka.logging.LoggingLevel;
+import walkingkooka.text.LineEnding;
+import walkingkooka.text.printer.Printers;
 
 public final class Sample {
 
@@ -35,5 +37,18 @@ public final class Sample {
                 () -> LoggingLevel.NONE,
                 CanLogs.nullCanLog()
             ).error("Hello World 123");
+    }
+
+    @Test
+    public void testCanLogPrinter() {
+        CanLogs.printer(
+            Printers.sink(
+                LineEnding.NL
+            )
+        ).log(
+            LoggingLevel.DEBUG,
+            "Message123",
+            new RuntimeException("Hello")
+        );
     }
 }

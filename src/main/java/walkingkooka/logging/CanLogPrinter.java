@@ -17,6 +17,7 @@
 
 package walkingkooka.logging;
 
+import javaemul.internal.annotations.GwtIncompatible;
 import walkingkooka.Cast;
 import walkingkooka.text.printer.Printer;
 
@@ -27,7 +28,8 @@ import java.util.Objects;
  * A {@link CanLog} that does not filter, and prints all messages and dumps the stack trace for any given {@link Throwable}.
  * The {@link LoggingLevel} is ignored and never printed.
  */
-final class CanLogPrinter implements CanLog {
+final class CanLogPrinter extends CanLogPrinterGwt
+    implements CanLog {
 
     static CanLogPrinter with(final Printer printer) {
         return new CanLogPrinter(
@@ -53,6 +55,16 @@ final class CanLogPrinter implements CanLog {
 
         printer.println(message);
 
+        this.logThrowable(
+            throwable,
+            printer
+        );
+    }
+
+    @Override
+    @GwtIncompatible
+    void logThrowable(final Throwable throwable,
+                      final Printer printer) {
         if (null != throwable) {
             try (final PrintWriter printWriter = printer.asPrintWriter()) {
                 throwable.printStackTrace(printWriter);
