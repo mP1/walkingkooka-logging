@@ -17,9 +17,17 @@
 
 package walkingkooka.logging;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.logging.LoggingContextDelegatorTest.TestLoggingContextDelegator;
 
 public final class LoggingContextDelegatorTest implements LoggingContextTesting2<TestLoggingContextDelegator> {
+
+    @Test
+    public void testLoggingLevel() {
+        this.loggingLevelAndCheck(
+            LoggingLevel.NONE
+        );
+    }
 
     @Override
     public TestLoggingContextDelegator createContext() {
