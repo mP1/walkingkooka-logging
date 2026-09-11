@@ -22,6 +22,8 @@ import com.google.gwt.junit.client.GWTTestCase;
 import walkingkooka.logging.CanLogs;
 import walkingkooka.logging.LoggingContexts;
 import walkingkooka.logging.LoggingLevel;
+import walkingkooka.text.LineEnding;
+import walkingkooka.text.printer.Printers;
 
 public class TestGwtTest extends GWTTestCase {
 
@@ -42,5 +44,17 @@ public class TestGwtTest extends GWTTestCase {
             () -> LoggingLevel.NONE,
             CanLogs.nullCanLog()
         ).error("Hello World 123");
+    }
+
+    public void testCanLogPrinter() {
+        CanLogs.printer(
+            Printers.sink(
+                LineEnding.NL
+            )
+        ).log(
+            LoggingLevel.DEBUG,
+            "Message123",
+            new RuntimeException("Hello")
+        );
     }
 }
