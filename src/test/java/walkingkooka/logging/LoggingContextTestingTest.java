@@ -17,5 +17,15 @@
 
 package walkingkooka.logging;
 
+import org.junit.jupiter.api.Test;
+
 public class LoggingContextTestingTest implements LoggingContextTesting {
+
+    @Test
+    public final void testLoggingContextConstantLoggingLevel() {
+        this.loggingLevelAndCheck(
+            LoggingContextTesting.LOGGING_CONTEXT,
+            LoggingLevel.NONE
+        );
+    }
 }
