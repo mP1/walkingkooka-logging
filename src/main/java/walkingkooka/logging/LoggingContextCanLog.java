@@ -178,7 +178,7 @@ final class LoggingContextCanLog implements LoggingContext {
         return this.loggingLevel.loggingLevel();
     }
 
-    private HasLoggingLevel loggingLevel;
+    private final HasLoggingLevel loggingLevel;
 
     // Object...........................................................................................................
 
