@@ -47,6 +47,17 @@ public final class CanLogs implements PublicStaticHelper {
     }
 
     /**
+     * {@link CanLogTee}
+     */
+    public static CanLog tee(final CanLog first,
+                             final CanLog second) {
+        return CanLogTee.with(
+            first,
+            second
+        );
+    }
+
+    /**
      * Stop creation
      */
     private CanLogs() {
