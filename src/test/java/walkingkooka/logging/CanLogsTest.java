@@ -17,7 +17,6 @@
 
 package walkingkooka.logging;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -27,11 +26,6 @@ public final class CanLogsTest implements PublicStaticHelperTesting<CanLogs> {
     @Override
     public Class<CanLogs> type() {
         return CanLogs.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override
