@@ -27,6 +27,10 @@ import java.util.Objects;
 /**
  * A {@link CanLog} that does not filter, and prints all messages and dumps the stack trace for any given {@link Throwable}.
  * The {@link LoggingLevel} is ignored and never printed.
+ * <pre>
+ * DEBUG message 1
+ * INFO message 2
+ * </pre>
  */
 final class CanLogPrinter extends CanLogPrinterGwt
     implements CanLog {
@@ -53,7 +57,7 @@ final class CanLogPrinter extends CanLogPrinterGwt
 
         final Printer printer = this.printer;
 
-        printer.println(message);
+        printer.println(level + " " + message);
 
         this.logThrowable(
             throwable,

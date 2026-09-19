@@ -65,7 +65,7 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         );
 
         this.checkEquals(
-            MESSAGE + LINE_ENDING,
+            LoggingLevel.INFO + " " + MESSAGE + LINE_ENDING,
             b.toString()
         );
     }
@@ -83,7 +83,7 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         );
 
         this.checkEquals(
-            "message 123\n" +
+            "INFO message 123\n" +
                 "StackTrace etc 123\n",
             b.toString()
         );
@@ -101,7 +101,7 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         );
 
         this.checkEquals(
-            MESSAGE + LINE_ENDING,
+            LoggingLevel.WARN + " " + MESSAGE + LINE_ENDING,
             b.toString()
         );
     }
@@ -119,7 +119,7 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         );
 
         this.checkEquals(
-            "message 123\n" +
+            "WARN message 123\n" +
                 "StackTrace etc 123\n",
             b.toString()
         );
