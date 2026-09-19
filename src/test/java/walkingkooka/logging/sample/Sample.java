@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.logging.CanLogs;
 import walkingkooka.logging.LoggingContexts;
 import walkingkooka.logging.LoggingLevel;
+import walkingkooka.props.Properties;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.Printers;
 
@@ -50,5 +51,10 @@ public final class Sample {
             "Message123",
             new RuntimeException("Hello")
         );
+    }
+
+    @Test
+    public void testPropertiesEmpty() {
+        Properties.EMPTY.isEmpty();
     }
 }
