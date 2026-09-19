@@ -25,9 +25,11 @@ import org.junit.Test;
 import walkingkooka.logging.CanLogs;
 import walkingkooka.logging.LoggingContexts;
 import walkingkooka.logging.LoggingLevel;
+import walkingkooka.props.Properties;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.Printers;
 
+@walkingkooka.j2cl.locale.LocaleAware
 @J2clTestInput(JunitTest.class)
 public class JunitTest {
 
@@ -58,5 +60,10 @@ public class JunitTest {
             "Message123",
             new RuntimeException("Hello")
         );
+    }
+
+    @Test
+    public void testPropertiesEmpty() {
+        Properties.EMPTY.isEmpty();
     }
 }

@@ -18,6 +18,7 @@
 
 <module>
     <inherits name="walkingkooka.Walkingkooka"/>
+    <inherits name="walkingkooka.props.Props"/>
     <inherits name="walkingkooka.text.printer.Printer"/>
     <source path=""/>
 </module>

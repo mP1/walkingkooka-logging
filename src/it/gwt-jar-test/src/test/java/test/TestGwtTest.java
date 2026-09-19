@@ -22,9 +22,11 @@ import com.google.gwt.junit.client.GWTTestCase;
 import walkingkooka.logging.CanLogs;
 import walkingkooka.logging.LoggingContexts;
 import walkingkooka.logging.LoggingLevel;
+import walkingkooka.props.Properties;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.Printers;
 
+@walkingkooka.j2cl.locale.LocaleAware
 public class TestGwtTest extends GWTTestCase {
 
     @Override
@@ -56,5 +58,9 @@ public class TestGwtTest extends GWTTestCase {
             "Message123",
             new RuntimeException("Hello")
         );
+    }
+
+    public void testPropertiesEmpty() {
+        Properties.EMPTY.isEmpty();
     }
 }
