@@ -25,7 +25,7 @@ import walkingkooka.reflect.ThrowableTesting;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class LoggingLevelProviderPropertiesTest implements LoggingLevelProviderTesting,
+public final class LoggingLevelProviderPropertiesTest implements LoggingLevelProviderTesting2<LoggingLevelProviderProperties>,
     PackagePrivateClassTesting<LoggingLevelProviderProperties>,
     ThrowableTesting,
     ToStringTesting<LoggingLevelProviderProperties> {
@@ -71,10 +71,6 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     @Test
     public void testLoggingLevelForPropertiesEntry() {
         this.loggingLevelForAndCheck(
-            LoggingLevelProviderProperties.with(
-                Properties.parse("hello.world=DEBUG\nhello=INFO"),
-                LoggingLevel.NONE
-            ),
             LoggerPath.parse("hello.world"),
             LoggingLevel.DEBUG
         );
@@ -83,10 +79,6 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     @Test
     public void testLoggingLevelForPropertiesEntryParent() {
         this.loggingLevelForAndCheck(
-            LoggingLevelProviderProperties.with(
-                Properties.parse("hello.world=DEBUG\nhello=INFO"),
-                LoggingLevel.NONE
-            ),
             LoggerPath.parse("hello.222"),
             LoggingLevel.INFO
         );
@@ -95,11 +87,15 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     @Test
     public void testLoggingLevelForPropertiesPathMissing() {
         this.loggingLevelForAndCheck(
-            LoggingLevelProviderProperties.with(
-                Properties.parse("hello.world=DEBUG\nhello=INFO"),
-                LoggingLevel.NONE
-            ),
             LoggerPath.parse("missing.123"),
+            LoggingLevel.NONE
+        );
+    }
+
+    @Override
+    public LoggingLevelProviderProperties createLoggingLevelProvider() {
+        return LoggingLevelProviderProperties.with(
+            Properties.parse("hello.world=DEBUG\nhello=INFO"),
             LoggingLevel.NONE
         );
     }
@@ -109,10 +105,7 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            LoggingLevelProviderProperties.with(
-                Properties.parse("hello.world=DEBUG\nhello=INFO"),
-                LoggingLevel.NONE
-            ),
+            this.createLoggingLevelProvider(),
             "hello=INFO\r\n" +
                 "hello.world=DEBUG\r\n" +
                 "NONE"
