@@ -26,9 +26,13 @@ public final class LoggerName implements PathName,
     Comparable<LoggerName> {
 
     public static LoggerName with(final String name) {
-        return new LoggerName(
+        return withPropertiesName(
             PropertiesName.with(name)
         );
+    }
+
+    static LoggerName withPropertiesName(final PropertiesName propertiesName) {
+        return new LoggerName(propertiesName);
     }
 
     private LoggerName(final PropertiesName propertiesName) {
@@ -42,7 +46,7 @@ public final class LoggerName implements PathName,
         return this.propertiesName.value();
     }
 
-    private final PropertiesName propertiesName;
+    final PropertiesName propertiesName;
 
     // HasCaseSensitivity...............................................................................................
 
