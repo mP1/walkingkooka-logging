@@ -17,7 +17,7 @@
 
 package walkingkooka.logging;
 
-public enum LoggingLevel {
+public enum LoggingLevel implements HasLoggingLevel{
 
     DEBUG(1),
 
@@ -41,4 +41,11 @@ public enum LoggingLevel {
     }
 
     private final int value;
+
+    // HasLoggingLevel..................................................................................................
+
+    @Override
+    public LoggingLevel loggingLevel() {
+        return this;
+    }
 }

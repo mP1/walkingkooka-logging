@@ -20,7 +20,8 @@ package walkingkooka.logging;
 import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.PublicClassTesting;
 
-public final class LoggingLevelTest implements PublicClassTesting<LoggingLevel> {
+public final class LoggingLevelTest implements HasLoggingLevelTesting,
+    PublicClassTesting<LoggingLevel> {
 
     @Test
     public void testIsEnabledDebugWithDebug() {
@@ -79,6 +80,26 @@ public final class LoggingLevelTest implements PublicClassTesting<LoggingLevel> 
             level.isEnabled(test),
             () -> level + " isEnabled " + test
         );
+    }
+
+    // HasLoggingLevel..................................................................................................
+
+    @Test
+    public void testLoggingLevel() {
+        this.loggingLevelAndCheck(
+            LoggingLevel.DEBUG,
+            LoggingLevel.DEBUG
+        );
+    }
+
+    @Test
+    public void testLoggingLevel2() {
+        for (final LoggingLevel level : LoggingLevel.values()) {
+            this.loggingLevelAndCheck(
+                level,
+                level
+            );
+        }
     }
 
     // class............................................................................................................
