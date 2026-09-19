@@ -121,5 +121,5 @@ public final class LoggerPath implements Path<LoggerPath, LoggerName>, Comparabl
         return this.propertiesPath.compareTo(other.propertiesPath);
     }
 
-    private final PropertiesPath propertiesPath;
+    final PropertiesPath propertiesPath;
 }
