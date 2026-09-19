@@ -26,6 +26,13 @@ import walkingkooka.reflect.PublicStaticHelper;
 public final class LoggingLevelProviders implements PublicStaticHelper {
 
     /**
+     * {@link FakeLoggingLevelProvider}
+     */
+    public static FakeLoggingLevelProvider fake() {
+        return new FakeLoggingLevelProvider();
+    }
+
+    /**
      * {@link LoggingLevelProviderProperties}
      */
     public static LoggingLevelProvider properties(final Properties properties,
