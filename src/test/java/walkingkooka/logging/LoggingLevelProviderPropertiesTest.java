@@ -19,6 +19,7 @@ package walkingkooka.logging;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
+import walkingkooka.props.HasPropertiesTesting;
 import walkingkooka.props.Properties;
 import walkingkooka.reflect.PackagePrivateClassTesting;
 import walkingkooka.reflect.ThrowableTesting;
@@ -26,9 +27,12 @@ import walkingkooka.reflect.ThrowableTesting;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class LoggingLevelProviderPropertiesTest implements LoggingLevelProviderTesting2<LoggingLevelProviderProperties>,
+    HasPropertiesTesting,
     PackagePrivateClassTesting<LoggingLevelProviderProperties>,
     ThrowableTesting,
     ToStringTesting<LoggingLevelProviderProperties> {
+
+    private final static Properties PROPERTIES = Properties.parse("hello.world=DEBUG\nhello=INFO");
 
     @Test
     public void testWithNullPropertiesFails() {
@@ -95,7 +99,7 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     @Override
     public LoggingLevelProviderProperties createLoggingLevelProvider() {
         return LoggingLevelProviderProperties.with(
-            Properties.parse("hello.world=DEBUG\nhello=INFO"),
+            PROPERTIES,
             LoggingLevel.NONE
         );
     }
@@ -109,6 +113,16 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
             "hello=INFO\r\n" +
                 "hello.world=DEBUG\r\n" +
                 "NONE"
+        );
+    }
+
+    // HasProperties....................................................................................................
+
+    @Test
+    public void testProperties() {
+        this.propertiesAndCheck(
+            this.createLoggingLevelProvider(),
+            PROPERTIES
         );
     }
 

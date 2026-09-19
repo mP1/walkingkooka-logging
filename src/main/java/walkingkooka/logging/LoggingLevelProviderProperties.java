@@ -17,6 +17,7 @@
 
 package walkingkooka.logging;
 
+import walkingkooka.props.HasProperties;
 import walkingkooka.props.Properties;
 import walkingkooka.props.PropertiesPath;
 import walkingkooka.text.CharSequences;
@@ -27,7 +28,8 @@ import java.util.Objects;
 /**
  * A {@link LoggingLevelProvider} that sources {@link LoggingLevel} from a {@link Properties}.
  */
-final class LoggingLevelProviderProperties implements LoggingLevelProvider {
+final class LoggingLevelProviderProperties implements LoggingLevelProvider,
+    HasProperties {
 
     static LoggingLevelProviderProperties with(final Properties properties,
                                                final HasLoggingLevel loggingLevel) {
@@ -84,12 +86,19 @@ final class LoggingLevelProviderProperties implements LoggingLevelProvider {
             this.loggingLevel.loggingLevel();
     }
 
-    private final Properties properties;
-
     /**
      * Provides the default if a {@link LoggingLevel} cannot be determined from the properties.
      */
     private final HasLoggingLevel loggingLevel;
+
+    // HasProperties....................................................................................................
+
+    @Override
+    public Properties properties() {
+        return this.properties;
+    }
+
+    private final Properties properties;
 
     // Object...........................................................................................................
 
