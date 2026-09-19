@@ -115,7 +115,7 @@ public final class LoggingContextCanLogTest implements LoggingContextTesting2<Lo
         context.info(MESSAGE);
 
         this.checkEquals(
-            MESSAGE + LINE_ENDING,
+            LoggingLevel.INFO + " " + MESSAGE + LINE_ENDING,
             b.toString()
         );
     }
@@ -129,7 +129,7 @@ public final class LoggingContextCanLogTest implements LoggingContextTesting2<Lo
         context.info(MESSAGE, THROWABLE);
 
         this.checkEquals(
-            "message 123\n" +
+            "INFO message 123\n" +
                 "StackTrace etc 123\n",
             b.toString()
         );
@@ -144,7 +144,7 @@ public final class LoggingContextCanLogTest implements LoggingContextTesting2<Lo
         context.warn(MESSAGE);
 
         this.checkEquals(
-            MESSAGE + LINE_ENDING,
+            LoggingLevel.WARN + " " + MESSAGE + LINE_ENDING,
             b.toString()
         );
     }
@@ -158,7 +158,7 @@ public final class LoggingContextCanLogTest implements LoggingContextTesting2<Lo
         context.warn(MESSAGE, THROWABLE);
 
         this.checkEquals(
-            "message 123\n" +
+            "WARN message 123\n" +
                 "StackTrace etc 123\n",
             b.toString()
         );
