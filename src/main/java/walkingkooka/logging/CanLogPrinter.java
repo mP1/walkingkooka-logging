@@ -70,10 +70,9 @@ final class CanLogPrinter extends CanLogPrinterGwt
     void logThrowable(final Throwable throwable,
                       final Printer printer) {
         if (null != throwable) {
-            try (final PrintWriter printWriter = printer.asPrintWriter()) {
-                throwable.printStackTrace(printWriter);
-                printWriter.flush();
-            }
+            final PrintWriter printWriter = printer.asPrintWriter();
+            throwable.printStackTrace(printWriter);
+            printWriter.flush();
         }
     }
 
