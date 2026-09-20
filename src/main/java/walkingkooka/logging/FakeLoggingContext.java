@@ -17,7 +17,8 @@
 
 package walkingkooka.logging;
 
-public class FakeLoggingContext implements LoggingContext {
+public class FakeLoggingContext extends FakeCanLog
+    implements LoggingContext {
     
     public FakeLoggingContext() {
         super();
@@ -64,19 +65,6 @@ public class FakeLoggingContext implements LoggingContext {
     @Override 
     public void error(final String message,
                       final Throwable throwable) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void log(final LoggingLevel level,
-                    final String message) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void log(final LoggingLevel level,
-                    final String message,
-                    final Throwable throwable) {
         throw new UnsupportedOperationException();
     }
 
