@@ -126,6 +126,20 @@ public final class CanLoggingLevelPropertiesTest implements CanLoggingLevelTesti
         );
     }
 
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testPrintTree() {
+        this.treePrintAndCheck(
+            this.createCanLoggingLevel(),
+            "CanLoggingLevelPropertiesloggingLevel\n" +
+                "    NONE\n" +
+                "  properties\n" +
+                "    hello=INFO\n" +
+                "    hello.world=DEBUG\n"
+        );
+    }
+
     // class............................................................................................................
 
     @Override
