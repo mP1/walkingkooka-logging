@@ -24,7 +24,8 @@ import java.util.Objects;
 /**
  * A {@link LoggingContext} that delegates all log messsages and {@link Throwable} to the given {@link CanLog}.
  */
-final class LoggingContextCanLog implements LoggingContext {
+final class LoggingContextCanLog implements LoggingContext,
+    CanLogDelegator {
 
     /**
      * Factory
@@ -118,31 +119,6 @@ final class LoggingContextCanLog implements LoggingContext {
     }
 
     @Override
-    public void log(final LoggingLevel level,
-                    final String message) {
-        this.log(
-            level,
-            message,
-            null
-        );
-    }
-
-    @Override
-    public void log(final LoggingLevel level,
-                    final String message,
-                    final Throwable throwable) {
-        if (this.isLoggingEnabled(level)) {
-            this.canLog.log(
-                level,
-                message,
-                throwable
-            );
-        }
-    }
-
-    private final CanLog canLog;
-
-    @Override
     public boolean isDebugEnabled() {
         return this.isLoggingEnabled(LoggingLevel.DEBUG);
     }
@@ -179,6 +155,29 @@ final class LoggingContextCanLog implements LoggingContext {
     }
 
     private final HasLoggingLevel loggingLevel;
+
+    // CanLogDelegator..................................................................................................
+
+    @Override
+    public void log(final LoggingLevel level,
+                    final String message,
+                    final Throwable throwable) {
+        if (this.isLoggingEnabled(level)) {
+            this.canLog()
+                .log(
+                    level,
+                    message,
+                    throwable
+                );
+        }
+    }
+
+    @Override
+    public CanLog canLog() {
+        return this.canLog;
+    }
+
+    private final CanLog canLog;
 
     // Object...........................................................................................................
 
