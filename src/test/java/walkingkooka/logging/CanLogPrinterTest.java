@@ -58,9 +58,9 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogWithInfo() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter context = this.createCanLog(b);
+        final CanLogPrinter canLogPrinter = this.createCanLog(b);
 
-        context.log(
+        canLogPrinter.log(
             LoggingLevel.INFO,
             MESSAGE
         );
@@ -75,9 +75,9 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testInfoThrowable() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter context = this.createCanLog(b);
+        final CanLogPrinter canLogPrinter = this.createCanLog(b);
 
-        context.log(
+        canLogPrinter.log(
             LoggingLevel.INFO,
             MESSAGE,
             THROWABLE
@@ -94,9 +94,9 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogWithWarn() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter context = this.createCanLog(b);
+        final CanLogPrinter canLogPrinter = this.createCanLog(b);
 
-        context.log(
+        canLogPrinter.log(
             LoggingLevel.WARN,
             MESSAGE
         );
@@ -111,9 +111,9 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogWithWarnThrowable() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter context = this.createCanLog(b);
+        final CanLogPrinter canLogPrinter = this.createCanLog(b);
 
-        context.log(
+        canLogPrinter.log(
             LoggingLevel.WARN,
             MESSAGE,
             THROWABLE
@@ -130,13 +130,13 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogEnterAndLog() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter context = this.createCanLog(b);
+        final CanLogPrinter canLogPrinter = this.createCanLog(b);
 
-        context.logEnter(
+        canLogPrinter.logEnter(
             LoggerPath.parse("logger1")
         );
         {
-            context.log(
+            canLogPrinter.log(
                 LoggingLevel.WARN,
                 MESSAGE,
                 THROWABLE
@@ -153,39 +153,39 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogEnterAndLog2() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter context = this.createCanLog(b);
+        final CanLogPrinter canLogPrinter = this.createCanLog(b);
 
-        context.logEnter(
+        canLogPrinter.logEnter(
             LoggerPath.parse("logger1")
         );
         {
-            context.log(
+            canLogPrinter.log(
                 LoggingLevel.DEBUG,
                 MESSAGE,
                 null
             );
 
             {
-                context.logEnter(
+                canLogPrinter.logEnter(
                     LoggerPath.parse("logger2")
                 );
                 {
-                    context.log(
+                    canLogPrinter.log(
                         LoggingLevel.INFO,
                         MESSAGE2,
                         null
                     );
                 }
-                context.logExit();
+                canLogPrinter.logExit();
             }
 
-            context.log(
+            canLogPrinter.log(
                 LoggingLevel.WARN,
                 "message 333",
                 null
             );
         }
-        context.logExit();
+        canLogPrinter.logExit();
 
         this.checkEquals(
             "logger1 DEBUG message 111\n" +
@@ -199,21 +199,21 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogEnterAndLogLogExitLog() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter context = this.createCanLog(b);
+        final CanLogPrinter canLogPrinter = this.createCanLog(b);
 
-        context.logEnter(
+        canLogPrinter.logEnter(
             LoggerPath.parse("logger1")
         );
         {
-            context.log(
+            canLogPrinter.log(
                 LoggingLevel.WARN,
                 MESSAGE,
                 THROWABLE
             );
         }
-        context.logExit();
+        canLogPrinter.logExit();
 
-        context.log(
+        canLogPrinter.log(
             LoggingLevel.DEBUG,
             MESSAGE2
         );
@@ -230,15 +230,15 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogWithWarnThrowable2() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter context = this.createCanLog(b);
+        final CanLogPrinter canLogPrinter = this.createCanLog(b);
 
-        context.log(
+        canLogPrinter.log(
             LoggingLevel.WARN,
             MESSAGE,
             THROWABLE
         );
 
-        context.log(
+        canLogPrinter.log(
             LoggingLevel.ERROR,
             MESSAGE2
         );
