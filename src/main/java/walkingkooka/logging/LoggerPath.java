@@ -33,8 +33,6 @@ public final class LoggerPath implements Path<LoggerPath, LoggerName>, Comparabl
      */
     public final static PathSeparator SEPARATOR = PropertiesPath.SEPARATOR;
 
-    final static Optional<LoggerPath> NO_PARENT = Optional.empty();
-
     /**
      * Parses the {@link String} into a {@link LoggerPath}
      */
