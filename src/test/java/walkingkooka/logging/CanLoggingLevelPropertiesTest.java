@@ -96,6 +96,78 @@ public final class CanLoggingLevelPropertiesTest implements CanLoggingLevelTesti
         );
     }
 
+    @Test
+    public void testLoggingLevelMany() {
+        final CanLoggingLevelProperties canLoggingLevelProperties = CanLoggingLevelProperties.with(
+            Properties.parse(
+                "hello.world.111=DEBUG\n" +
+                    "hello.222=INFO\n" +
+                    "hello=WARN\n"
+            ),
+            LoggingLevel.ERROR
+        );
+
+        this.loggingLevelForAndCheck(
+            canLoggingLevelProperties,
+            LoggerPath.parse("hello.world.111"),
+            LoggingLevel.DEBUG
+        );
+
+        this.loggingLevelForAndCheck(
+            canLoggingLevelProperties,
+            LoggerPath.parse("hello.world"),
+            LoggingLevel.DEBUG
+        );
+
+        this.loggingLevelForAndCheck(
+            canLoggingLevelProperties,
+            LoggerPath.parse("hello.222"),
+            LoggingLevel.INFO
+        );
+
+        this.loggingLevelForAndCheck(
+            canLoggingLevelProperties,
+            LoggerPath.parse("hello"),
+            LoggingLevel.WARN
+        );
+    }
+
+    @Test
+    public void testLoggingLevelMany2() {
+        final CanLoggingLevelProperties canLoggingLevelProperties = CanLoggingLevelProperties.with(
+            Properties.parse(
+                "aaa.222=INFO\n" +
+                    "bbb=WARN\n" +
+                "hello.world.111=DEBUG\n"
+            ),
+            LoggingLevel.ERROR
+        );
+
+        this.loggingLevelForAndCheck(
+            canLoggingLevelProperties,
+            LoggerPath.parse("hello.world.111"),
+            LoggingLevel.DEBUG
+        );
+
+        this.loggingLevelForAndCheck(
+            canLoggingLevelProperties,
+            LoggerPath.parse("hello.world"),
+            LoggingLevel.DEBUG
+        );
+
+        this.loggingLevelForAndCheck(
+            canLoggingLevelProperties,
+            LoggerPath.parse("aaa.222"),
+            LoggingLevel.INFO
+        );
+
+        this.loggingLevelForAndCheck(
+            canLoggingLevelProperties,
+            LoggerPath.parse("bbb"),
+            LoggingLevel.WARN
+        );
+    }
+
     @Override
     public CanLoggingLevelProperties createCanLoggingLevel() {
         return CanLoggingLevelProperties.with(

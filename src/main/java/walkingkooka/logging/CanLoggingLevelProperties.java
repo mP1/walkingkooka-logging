@@ -17,6 +17,7 @@
 
 package walkingkooka.logging;
 
+import walkingkooka.collect.map.Maps;
 import walkingkooka.props.HasProperties;
 import walkingkooka.props.Properties;
 import walkingkooka.props.PropertiesPath;
@@ -24,6 +25,7 @@ import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
@@ -46,19 +48,43 @@ final class CanLoggingLevelProperties implements CanLoggingLevel,
                                       final HasLoggingLevel loggingLevel) {
         super();
 
-        for(Entry<PropertiesPath, String> propertiesPathAndLoggingLevel : properties.entries()) {
-            final PropertiesPath propertiesPath = propertiesPathAndLoggingLevel.getKey();
+        final Map<PropertiesPath, LoggingLevel> loggerToLoggingLevel = Maps.hash();
+
+        for (Entry<PropertiesPath, String> propertiesPathAndLoggingLevel : properties.entries()) {
+            PropertiesPath propertiesPath = propertiesPathAndLoggingLevel.getKey();
             final String loggingLevelName = propertiesPathAndLoggingLevel.getValue();
 
+            final LoggingLevel l;
             try {
-                LoggingLevel.valueOf(loggingLevelName);
+                l = LoggingLevel.valueOf(loggingLevelName);
             } catch (final IllegalArgumentException cause) {
                 throw new IllegalArgumentException(
                     "Properties entry " + CharSequences.quoteAndEscape(propertiesPath.toString()) + " contains invalid LoggingLevel " + CharSequences.quoteAndEscape(loggingLevelName),
                     cause
                 );
             }
+
+            loggerToLoggingLevel.put(
+                propertiesPath,
+                l
+            );
+
+            for (; ; ) {
+                propertiesPath = propertiesPath.parent()
+                    .orElse(null);
+                if (null == propertiesPath) {
+                    break;
+                }
+
+                if (null != loggerToLoggingLevel.putIfAbsent(
+                    propertiesPath,
+                    l
+                )) {
+                    break;
+                }
+            }
         }
+        this.loggerToLoggingLevel = loggerToLoggingLevel;
 
         this.properties = properties;
         this.loggingLevel = loggingLevel;
@@ -68,14 +94,12 @@ final class CanLoggingLevelProperties implements CanLoggingLevel,
     public LoggingLevel loggingLevelFor(final LoggerPath path) {
         Objects.requireNonNull(path, "path");
 
-        LoggingLevel loggingLevel = null;
+        LoggingLevel loggingLevel;
 
-        LoggerPath p = path;
+        PropertiesPath p = path.propertiesPath;
         do {
-            final String loggingLevelString = this.properties.get(p.propertiesPath)
-                .orElse(null);
-            if(null != loggingLevelString) {
-                loggingLevel = LoggingLevel.valueOf(loggingLevelString);
+            loggingLevel = this.loggerToLoggingLevel.get(p);
+            if(null != loggingLevel) {
                 break;
             }
 
@@ -88,6 +112,8 @@ final class CanLoggingLevelProperties implements CanLoggingLevel,
             loggingLevel :
             this.loggingLevel.loggingLevel();
     }
+
+    private final Map<PropertiesPath, LoggingLevel> loggerToLoggingLevel;
 
     // HasLoggingLevel..................................................................................................
 
