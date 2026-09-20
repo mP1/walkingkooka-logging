@@ -21,6 +21,8 @@ import walkingkooka.props.HasProperties;
 import walkingkooka.props.Properties;
 import walkingkooka.props.PropertiesPath;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.TreePrintable;
 
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -29,7 +31,8 @@ import java.util.Objects;
  * A {@link CanLoggingLevel} that sources {@link LoggingLevel} from a {@link Properties}.
  */
 final class CanLoggingLevelProperties implements CanLoggingLevel,
-    HasProperties {
+    HasProperties,
+    TreePrintable {
 
     static CanLoggingLevelProperties with(final Properties properties,
                                           final HasLoggingLevel loggingLevel) {
@@ -112,5 +115,32 @@ final class CanLoggingLevelProperties implements CanLoggingLevel,
     @Override
     public String toString() {
         return this.properties.toString() + this.loggingLevel;
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.print(this.getClass().getSimpleName());
+        printer.indent();
+        {
+            printer.println("loggingLevel");
+            printer.indent();
+            {
+                TreePrintable.printTreeOrToString(
+                    this.loggingLevel,
+                    printer
+                );
+            }
+            printer.outdent();
+
+            printer.println("properties");
+            printer.indent();
+            {
+                this.properties.printTree(printer);
+            }
+            printer.outdent();
+        }
+        printer.outdent();
     }
 }
