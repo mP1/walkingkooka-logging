@@ -21,23 +21,23 @@ import walkingkooka.props.Properties;
 import walkingkooka.reflect.PublicStaticHelper;
 
 /**
- * A collection of {@link LoggingLevelProvider}.
+ * A collection of {@link CanLoggingLevel}.
  */
-public final class LoggingLevelProviders implements PublicStaticHelper {
+public final class CanLoggingLevels implements PublicStaticHelper {
 
     /**
-     * {@link FakeLoggingLevelProvider}
+     * {@link FakeCanLoggingLevel}
      */
-    public static FakeLoggingLevelProvider fake() {
-        return new FakeLoggingLevelProvider();
+    public static FakeCanLoggingLevel fake() {
+        return new FakeCanLoggingLevel();
     }
 
     /**
-     * {@link LoggingLevelProviderProperties}
+     * {@link CanLoggingLevelProperties}
      */
-    public static LoggingLevelProvider properties(final Properties properties,
-                                                  final HasLoggingLevel loggingLevel) {
-        return LoggingLevelProviderProperties.with(
+    public static CanLoggingLevel properties(final Properties properties,
+                                             final HasLoggingLevel loggingLevel) {
+        return CanLoggingLevelProperties.with(
             properties,
             loggingLevel
         );
@@ -46,7 +46,7 @@ public final class LoggingLevelProviders implements PublicStaticHelper {
     /**
      * Stop creation
      */
-    private LoggingLevelProviders() {
+    private CanLoggingLevels() {
         throw new UnsupportedOperationException();
     }
 }

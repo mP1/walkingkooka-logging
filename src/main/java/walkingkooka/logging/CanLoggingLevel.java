@@ -17,14 +17,14 @@
 
 package walkingkooka.logging;
 
-public class FakeLoggingLevelProvider implements LoggingLevelProvider {
+/**
+ * May be used to query the {@link LoggingLevel} for a {@link LoggerPath}.
+ */
+public interface CanLoggingLevel {
 
-    public FakeLoggingLevelProvider() {
-        super();
-    }
-
-    @Override
-    public LoggingLevel loggingLevelFor(final LoggerPath path) {
-        throw new UnsupportedOperationException();
-    }
+    /**
+     * Returns the {@link LoggingLevel for the given {@link LoggerPath}, probably returning a default if absent,
+     * or the parent path.
+     */
+    LoggingLevel loggingLevelFor(final LoggerPath path);
 }

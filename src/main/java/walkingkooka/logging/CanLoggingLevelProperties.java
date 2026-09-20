@@ -26,21 +26,21 @@ import java.util.Map.Entry;
 import java.util.Objects;
 
 /**
- * A {@link LoggingLevelProvider} that sources {@link LoggingLevel} from a {@link Properties}.
+ * A {@link CanLoggingLevel} that sources {@link LoggingLevel} from a {@link Properties}.
  */
-final class LoggingLevelProviderProperties implements LoggingLevelProvider,
+final class CanLoggingLevelProperties implements CanLoggingLevel,
     HasProperties {
 
-    static LoggingLevelProviderProperties with(final Properties properties,
-                                               final HasLoggingLevel loggingLevel) {
-        return new LoggingLevelProviderProperties(
+    static CanLoggingLevelProperties with(final Properties properties,
+                                          final HasLoggingLevel loggingLevel) {
+        return new CanLoggingLevelProperties(
             Objects.requireNonNull(properties, "properties"),
             Objects.requireNonNull(loggingLevel, "loggingLevel")
         );
     }
 
-    private LoggingLevelProviderProperties(final Properties properties,
-                                           final HasLoggingLevel loggingLevel) {
+    private CanLoggingLevelProperties(final Properties properties,
+                                      final HasLoggingLevel loggingLevel) {
         super();
 
         for(Entry<PropertiesPath, String> propertiesPathAndLoggingLevel : properties.entries()) {

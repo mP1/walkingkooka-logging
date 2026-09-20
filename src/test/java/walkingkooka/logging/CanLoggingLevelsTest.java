@@ -21,11 +21,11 @@ import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
 
-public final class LoggingLevelProvidersTest implements PublicStaticHelperTesting<LoggingLevelProviders> {
+public final class CanLoggingLevelsTest implements PublicStaticHelperTesting<CanLoggingLevels> {
 
     @Override
-    public Class<LoggingLevelProviders> type() {
-        return LoggingLevelProviders.class;
+    public Class<CanLoggingLevels> type() {
+        return CanLoggingLevels.class;
     }
 
     @Override
