@@ -27,4 +27,9 @@ public class FakeCanLoggingLevel implements CanLoggingLevel {
     public LoggingLevel loggingLevelFor(final LoggerPath path) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public LoggingLevel loggingLevel() {
+        throw new UnsupportedOperationException();
+    }
 }
