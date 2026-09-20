@@ -17,9 +17,7 @@
 
 package walkingkooka.logging;
 
-import walkingkooka.text.printer.TreePrintableTesting;
-
-public interface CanLoggingLevelTesting extends TreePrintableTesting {
+public interface CanLoggingLevelTesting extends HasLoggingLevelTesting {
 
     default void loggingLevelForAndCheck(final CanLoggingLevel provider,
                                          final LoggerPath path,

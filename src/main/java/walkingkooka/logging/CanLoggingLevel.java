@@ -20,7 +20,7 @@ package walkingkooka.logging;
 /**
  * May be used to query the {@link LoggingLevel} for a {@link LoggerPath}.
  */
-public interface CanLoggingLevel {
+public interface CanLoggingLevel extends HasLoggingLevel {
 
     /**
      * Returns the {@link LoggingLevel for the given {@link LoggerPath}, probably returning a default if absent,

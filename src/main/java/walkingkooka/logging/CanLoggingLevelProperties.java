@@ -86,6 +86,13 @@ final class CanLoggingLevelProperties implements CanLoggingLevel,
             this.loggingLevel.loggingLevel();
     }
 
+    // HasLoggingLevel..................................................................................................
+
+    @Override
+    public LoggingLevel loggingLevel() {
+        return this.loggingLevel.loggingLevel();
+    }
+
     /**
      * Provides the default if a {@link LoggingLevel} cannot be determined from the properties.
      */
