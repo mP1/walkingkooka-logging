@@ -26,11 +26,11 @@ import walkingkooka.reflect.ThrowableTesting;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class LoggingLevelProviderPropertiesTest implements LoggingLevelProviderTesting2<LoggingLevelProviderProperties>,
+public final class CanLoggingLevelPropertiesTest implements CanLoggingLevelTesting2<CanLoggingLevelProperties>,
     HasPropertiesTesting,
-    PackagePrivateClassTesting<LoggingLevelProviderProperties>,
+    PackagePrivateClassTesting<CanLoggingLevelProperties>,
     ThrowableTesting,
-    ToStringTesting<LoggingLevelProviderProperties> {
+    ToStringTesting<CanLoggingLevelProperties> {
 
     private final static Properties PROPERTIES = Properties.parse("hello.world=DEBUG\nhello=INFO");
 
@@ -38,7 +38,7 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     public void testWithNullPropertiesFails() {
         assertThrows(
             NullPointerException.class,
-            () -> LoggingLevelProviderProperties.with(
+            () -> CanLoggingLevelProperties.with(
                 null,
                 LoggingLevel.DEBUG
             )
@@ -49,7 +49,7 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     public void testWithNullHasLoggingLevelFails() {
         assertThrows(
             NullPointerException.class,
-            () -> LoggingLevelProviderProperties.with(
+            () -> CanLoggingLevelProperties.with(
                 Properties.EMPTY,
                 null
             )
@@ -60,7 +60,7 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     public void testWithPropertiesHasInvalidLoggingLevelFails() {
         final IllegalArgumentException thrown = assertThrows(
             IllegalArgumentException.class,
-            () -> LoggingLevelProviderProperties.with(
+            () -> CanLoggingLevelProperties.with(
                 Properties.parse("hello.world=DEBUG\nhello.invalid=BAD-LOGGER_LEVEL"),
                 LoggingLevel.DEBUG
             )
@@ -97,8 +97,8 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     }
 
     @Override
-    public LoggingLevelProviderProperties createLoggingLevelProvider() {
-        return LoggingLevelProviderProperties.with(
+    public CanLoggingLevelProperties createCanLoggingLevel() {
+        return CanLoggingLevelProperties.with(
             PROPERTIES,
             LoggingLevel.NONE
         );
@@ -109,7 +109,7 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            this.createLoggingLevelProvider(),
+            this.createCanLoggingLevel(),
             "hello=INFO\r\n" +
                 "hello.world=DEBUG\r\n" +
                 "NONE"
@@ -121,7 +121,7 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     @Test
     public void testProperties() {
         this.propertiesAndCheck(
-            this.createLoggingLevelProvider(),
+            this.createCanLoggingLevel(),
             PROPERTIES
         );
     }
@@ -129,7 +129,7 @@ public final class LoggingLevelProviderPropertiesTest implements LoggingLevelPro
     // class............................................................................................................
 
     @Override
-    public Class<LoggingLevelProviderProperties> type() {
-        return LoggingLevelProviderProperties.class;
+    public Class<CanLoggingLevelProperties> type() {
+        return CanLoggingLevelProperties.class;
     }
 }

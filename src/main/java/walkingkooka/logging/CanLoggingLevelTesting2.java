@@ -17,17 +17,29 @@
 
 package walkingkooka.logging;
 
-import walkingkooka.text.printer.TreePrintableTesting;
+import org.junit.jupiter.api.Test;
 
-public interface LoggingLevelProviderTesting extends TreePrintableTesting {
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-    default void loggingLevelForAndCheck(final LoggingLevelProvider provider,
-                                         final LoggerPath path,
-                                         final LoggingLevel expected) {
-        this.checkEquals(
-            expected,
-            provider.loggingLevelFor(path),
-            "loggingLevelFor " + path
+public interface CanLoggingLevelTesting2<P extends CanLoggingLevel> extends CanLoggingLevelTesting {
+
+    @Test
+    default void loggingLevelForWithNullLoggerPathFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createCanLoggingLevel()
+                .loggingLevelFor(null)
         );
     }
+
+    default void loggingLevelForAndCheck(final LoggerPath path,
+                                         final LoggingLevel expected) {
+        this.loggingLevelForAndCheck(
+            this.createCanLoggingLevel(),
+            path,
+            expected
+        );
+    }
+
+    P createCanLoggingLevel();
 }

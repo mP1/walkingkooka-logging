@@ -17,14 +17,17 @@
 
 package walkingkooka.logging;
 
-/**
- * May be used to query the {@link LoggingLevel} for a {@link LoggerPath}.
- */
-public interface LoggingLevelProvider {
+import walkingkooka.text.printer.TreePrintableTesting;
 
-    /**
-     * Returns the {@link LoggingLevel for the given {@link LoggerPath}, probably returning a default if absent,
-     * or the parent path.
-     */
-    LoggingLevel loggingLevelFor(final LoggerPath path);
+public interface CanLoggingLevelTesting extends TreePrintableTesting {
+
+    default void loggingLevelForAndCheck(final CanLoggingLevel provider,
+                                         final LoggerPath path,
+                                         final LoggingLevel expected) {
+        this.checkEquals(
+            expected,
+            provider.loggingLevelFor(path),
+            "loggingLevelFor " + path
+        );
+    }
 }
