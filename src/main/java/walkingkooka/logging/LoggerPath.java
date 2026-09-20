@@ -21,6 +21,7 @@ import walkingkooka.naming.Path;
 import walkingkooka.naming.PathSeparator;
 import walkingkooka.props.PropertiesPath;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -37,8 +38,17 @@ public final class LoggerPath implements Path<LoggerPath, LoggerName>, Comparabl
      * Parses the {@link String} into a {@link LoggerPath}
      */
     public static LoggerPath parse(final String path) {
-        return new LoggerPath(
+        return with(
             PropertiesPath.parse(path)
+        );
+    }
+
+    /**
+     * Creates a {@link LoggerPath} with the given {@link PropertiesPath}.
+     */
+    public static LoggerPath with(final PropertiesPath path) {
+        return new LoggerPath(
+            Objects.requireNonNull(path, "path")
         );
     }
 
