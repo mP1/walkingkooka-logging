@@ -26,8 +26,18 @@ import walkingkooka.test.ParseStringTesting;
 
 import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class LoggerPathTest implements PathTesting<LoggerPath, LoggerName>,
     ParseStringTesting<LoggerPath> {
+
+    @Test
+    public void testWithNullPropertiesFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> LoggerPath.with(null)
+        );
+    }
 
     @Override
     public void testAppendNameToRoot() {
