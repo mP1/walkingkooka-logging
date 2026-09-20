@@ -17,9 +17,9 @@
 
 package walkingkooka.logging;
 
-import walkingkooka.test.Testing;
+import walkingkooka.text.printer.TreePrintableTesting;
 
-public interface HasLoggingLevelTesting extends Testing {
+public interface HasLoggingLevelTesting extends TreePrintableTesting {
 
     LoggingLevel LOGGING_LEVEL = LoggingLevel.NONE;
 
