@@ -17,6 +17,9 @@
 
 package walkingkooka.logging;
 
+/**
+ * Minimalist interface that supports logging messages if the accompanying {@link LoggingLevel} is enabled.
+ */
 public interface CanLog {
 
     default void log(final LoggingLevel level,
