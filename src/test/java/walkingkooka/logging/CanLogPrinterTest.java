@@ -125,6 +125,31 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         );
     }
 
+    @Test
+    public void testLogWithWarnThrowable2() {
+        final StringBuilder b = new StringBuilder();
+
+        final CanLogPrinter context = this.createCanLog(b);
+
+        context.log(
+            LoggingLevel.WARN,
+            MESSAGE,
+            THROWABLE
+        );
+
+        context.log(
+            LoggingLevel.ERROR,
+            "message222"
+        );
+
+        this.checkEquals(
+            "WARN message 123\n" +
+                "StackTrace etc 123\n" +
+                "ERROR message222\n",
+            b.toString()
+        );
+    }
+
     @Override
     public CanLogPrinter createCanLog() {
         return this.createCanLog(
