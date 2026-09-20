@@ -17,7 +17,8 @@
 
 package walkingkooka.logging;
 
-public interface LoggingContextDelegator extends LoggingContext {
+public interface LoggingContextDelegator extends LoggingContext,
+    CanLogDelegator {
 
     @Override
     default void debug(final String message) {
@@ -84,28 +85,6 @@ public interface LoggingContextDelegator extends LoggingContext {
     }
 
     @Override
-    default void log(final LoggingLevel level,
-                     final String message) {
-        this.loggingContext()
-            .log(
-                level,
-                message
-            );
-    }
-
-    @Override
-    default void log(final LoggingLevel level,
-                     final String message,
-                     final Throwable throwable) {
-        this.loggingContext()
-            .log(
-                level,
-                message,
-                throwable
-            );
-    }
-
-    @Override
     default boolean isDebugEnabled() {
         return this.loggingContext()
             .isDebugEnabled();
@@ -148,4 +127,11 @@ public interface LoggingContextDelegator extends LoggingContext {
     }
 
     LoggingContext loggingContext();
+
+    // CanLogDelegator..................................................................................................
+
+    @Override
+    default CanLog canLog() {
+        return this.loggingContext();
+    }
 }
