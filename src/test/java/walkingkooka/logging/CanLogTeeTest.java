@@ -89,6 +89,11 @@ public final class CanLogTeeTest implements CanLogTesting2<CanLogTee>,
     }
 
     @Override
+    public void testLogExitWithoutLogEnter() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public CanLogTee createCanLog() {
         return CanLogTee.with(
             CanLogs.nullCanLog(),

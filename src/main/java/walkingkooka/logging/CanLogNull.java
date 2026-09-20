@@ -31,6 +31,16 @@ final class CanLogNull implements CanLog {
     }
 
     @Override
+    public void logEnter(final LoggerPath logger) {
+        Objects.requireNonNull(logger, "logger");
+    }
+
+    @Override
+    public void logExit() {
+        // NOP
+    }
+
+    @Override
     public void log(final LoggingLevel level,
                     final String message,
                     final Throwable throwable) {

@@ -20,6 +20,16 @@ package walkingkooka.logging;
 public class FakeCanLog implements CanLog {
 
     @Override
+    public void logEnter(final LoggerPath logger) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void logExit() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void log(final LoggingLevel level,
                     final String message,
                     final Throwable throwable) {

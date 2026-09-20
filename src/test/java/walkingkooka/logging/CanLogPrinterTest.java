@@ -39,7 +39,7 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
 
         @Override
         public void printStackTrace(final PrintWriter printWriter) {
-            printWriter.println("StackTrace etc 123");
+            printWriter.println("StackTrace etc 111");
         }
     };
 
@@ -51,7 +51,8 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         );
     }
 
-    private final static String MESSAGE = "message 123";
+    private final static String MESSAGE = "message 111";
+    private final static String MESSAGE2 = "message 222";
 
     @Test
     public void testLogWithInfo() {
@@ -83,8 +84,8 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         );
 
         this.checkEquals(
-            "INFO message 123\n" +
-                "StackTrace etc 123\n",
+            "INFO message 111\n" +
+                "StackTrace etc 111\n",
             b.toString()
         );
     }
@@ -119,8 +120,108 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         );
 
         this.checkEquals(
-            "WARN message 123\n" +
-                "StackTrace etc 123\n",
+            "WARN message 111\n" +
+                "StackTrace etc 111\n",
+            b.toString()
+        );
+    }
+
+    @Test
+    public void testLogEnterAndLog() {
+        final StringBuilder b = new StringBuilder();
+
+        final CanLogPrinter context = this.createCanLog(b);
+
+        context.logEnter(
+            LoggerPath.parse("logger1")
+        );
+        {
+            context.log(
+                LoggingLevel.WARN,
+                MESSAGE,
+                THROWABLE
+            );
+        }
+        this.checkEquals(
+            "logger1 WARN message 111\n" +
+                "StackTrace etc 111\n",
+            b.toString()
+        );
+    }
+
+    @Test
+    public void testLogEnterAndLog2() {
+        final StringBuilder b = new StringBuilder();
+
+        final CanLogPrinter context = this.createCanLog(b);
+
+        context.logEnter(
+            LoggerPath.parse("logger1")
+        );
+        {
+            context.log(
+                LoggingLevel.DEBUG,
+                MESSAGE,
+                null
+            );
+
+            {
+                context.logEnter(
+                    LoggerPath.parse("logger2")
+                );
+                {
+                    context.log(
+                        LoggingLevel.INFO,
+                        MESSAGE2,
+                        null
+                    );
+                }
+                context.logExit();
+            }
+
+            context.log(
+                LoggingLevel.WARN,
+                "message 333",
+                null
+            );
+        }
+        context.logExit();
+
+        this.checkEquals(
+            "logger1 DEBUG message 111\n" +
+                "logger2 INFO message 222\n" +
+                "logger1 WARN message 333\n",
+            b.toString()
+        );
+    }
+
+    @Test
+    public void testLogEnterAndLogLogExitLog() {
+        final StringBuilder b = new StringBuilder();
+
+        final CanLogPrinter context = this.createCanLog(b);
+
+        context.logEnter(
+            LoggerPath.parse("logger1")
+        );
+        {
+            context.log(
+                LoggingLevel.WARN,
+                MESSAGE,
+                THROWABLE
+            );
+        }
+        context.logExit();
+
+        context.log(
+            LoggingLevel.DEBUG,
+            MESSAGE2
+        );
+
+        this.checkEquals(
+            "logger1 WARN message 111\n" +
+                "StackTrace etc 111\n" +
+            "DEBUG message 222\n",
             b.toString()
         );
     }
@@ -139,13 +240,13 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
 
         context.log(
             LoggingLevel.ERROR,
-            "message222"
+            MESSAGE2
         );
 
         this.checkEquals(
-            "WARN message 123\n" +
-                "StackTrace etc 123\n" +
-                "ERROR message222\n",
+            "WARN message 111\n" +
+                "StackTrace etc 111\n" +
+                "ERROR message 222\n",
             b.toString()
         );
     }

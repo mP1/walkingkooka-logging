@@ -19,6 +19,8 @@ package walkingkooka.logging;
 
 import javaemul.internal.annotations.GwtIncompatible;
 import walkingkooka.Cast;
+import walkingkooka.collect.stack.Stack;
+import walkingkooka.collect.stack.Stacks;
 import walkingkooka.text.printer.Printer;
 
 import java.io.PrintWriter;
@@ -50,6 +52,23 @@ final class CanLogPrinter extends CanLogPrinterGwt
     // CanLog...........................................................................................................
 
     @Override
+    public void logEnter(final LoggerPath logger) {
+        Objects.requireNonNull(logger, "logger");
+
+        this.loggers.push(logger);
+    }
+
+    @Override
+    public void logExit() {
+        // NO LOCK!
+        if (this.loggers.isNotEmpty()) {
+            this.loggers.pop();
+        }
+    }
+
+    private final Stack<LoggerPath> loggers = Stacks.arrayList();
+
+    @Override
     public void log(final LoggingLevel level,
                     final String message,
                     final Throwable throwable) {
@@ -57,7 +76,18 @@ final class CanLogPrinter extends CanLogPrinterGwt
 
         final Printer printer = this.printer;
 
-        printer.println(level + " " + message);
+        // LOGGER1 DEBUG message1
+        // DEBUG message 1
+        if (this.loggers.isNotEmpty()) {
+            printer.print(
+                this.loggers.peek().value()
+            );
+            printer.print(" ");
+        }
+
+        printer.print(level.name());
+        printer.print(" ");
+        printer.println(message);
 
         this.logThrowable(
             throwable,

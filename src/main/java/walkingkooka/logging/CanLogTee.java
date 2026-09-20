@@ -43,6 +43,18 @@ final class CanLogTee implements CanLog {
     // CanLog...........................................................................................................
 
     @Override
+    public void logEnter(final LoggerPath logger) {
+        this.first.logEnter(logger);
+        this.second.logEnter(logger);
+    }
+
+    @Override
+    public void logExit() {
+        this.first.logExit();
+        this.second.logExit();
+    }
+
+    @Override
     public void log(final LoggingLevel level,
                     final String message,
                     final Throwable throwable) {
