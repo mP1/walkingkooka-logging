@@ -22,6 +22,17 @@ package walkingkooka.logging;
  */
 public interface CanLog {
 
+    /**
+     * Starts a new logging scope set to the given {@link LoggerPath}. This will be used to determine the current
+     * {@link LoggingLevel}.
+     */
+    void logEnter(final LoggerPath logger);
+
+    /**
+     * Closes a previous entered {@link #logEnter(LoggerPath)} scope.
+     */
+    void logExit();
+
     default void log(final LoggingLevel level,
                      final String message) {
         this.log(

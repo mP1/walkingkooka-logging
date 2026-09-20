@@ -20,6 +20,18 @@ package walkingkooka.logging;
 public interface CanLogDelegator extends CanLog {
 
     @Override
+    default void logEnter(final LoggerPath logger) {
+        this.canLog()
+            .logEnter(logger);
+    }
+
+    @Override
+    default void logExit() {
+        this.canLog()
+            .logExit();
+    }
+
+    @Override
     default void log(final LoggingLevel level,
                      final String message,
                      final Throwable throwable) {

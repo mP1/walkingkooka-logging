@@ -34,7 +34,7 @@ public final class LoggingContextCanLogTest implements LoggingContextTesting2<Lo
 
     private final static HasLoggingLevel HAS_LOGGING_LEVEL = () -> LoggingLevel.INFO;
 
-    private final static CanLog CAN_LOG = CanLogs.fake();
+    private final static CanLog CAN_LOG = CanLogs.nullCanLog();
 
     private final static Throwable THROWABLE = new Throwable("throwable message") {
 
