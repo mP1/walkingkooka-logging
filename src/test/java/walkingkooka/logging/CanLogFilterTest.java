@@ -24,9 +24,9 @@ import walkingkooka.text.HasLineEndingTesting;
 import walkingkooka.text.printer.Printer;
 import walkingkooka.text.printer.Printers;
 
-public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCanLoggingLevel>,
+public final class CanLogFilterTest implements CanLogTesting2<CanLogFilter>,
     HasLineEndingTesting,
-    ToStringTesting<CanLogCanLoggingLevel> {
+    ToStringTesting<CanLogFilter> {
 
     private final static LoggerPath LOGGER1 = LoggerPath.parse("logger1");
     private final static LoggerPath LOGGER2 = LoggerPath.parse("logger2");
@@ -38,7 +38,7 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
 
     @Test
     public void testLogEnterAndLogLogExit() {
-        final CanLogCanLoggingLevel canLogCanLoggingLevel = this.createCanLog(
+        final CanLogFilter canLogFilter = this.createCanLog(
             LoggingLevel.DEBUG,
             Printers.fake(),
             properties(
@@ -48,39 +48,39 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
             )
         );
 
-        canLogCanLoggingLevel.logEnter(LOGGER1);
+        canLogFilter.logEnter(LOGGER1);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.DEBUG,
                 MESSAGE1
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
-        canLogCanLoggingLevel.logEnter(LOGGER2);
+        canLogFilter.logEnter(LOGGER2);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.DEBUG,
                 MESSAGE2
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
-        canLogCanLoggingLevel.logEnter(LOGGER3);
+        canLogFilter.logEnter(LOGGER3);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.DEBUG,
                 MESSAGE3
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
     }
 
     @Test
     public void testLogEnterAndLogLogExit2() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogCanLoggingLevel canLogCanLoggingLevel = this.createCanLog(
+        final CanLogFilter canLogFilter = this.createCanLog(
             LoggingLevel.DEBUG,
             b,
             properties(
@@ -90,37 +90,37 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
             )
         );
 
-        canLogCanLoggingLevel.logEnter(LOGGER1);
+        canLogFilter.logEnter(LOGGER1);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.DEBUG,
                 MESSAGE1
             );
 
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.INFO,
                 MESSAGE1
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
-        canLogCanLoggingLevel.logEnter(LOGGER2);
+        canLogFilter.logEnter(LOGGER2);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.DEBUG,
                 MESSAGE2
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
-        canLogCanLoggingLevel.logEnter(LOGGER3);
+        canLogFilter.logEnter(LOGGER3);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.DEBUG,
                 MESSAGE3
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
         this.checkEquals(
             "logger1 DEBUG message1\n" +
@@ -133,7 +133,7 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
     public void testLogEnterAndLogLogExit3() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogCanLoggingLevel canLogCanLoggingLevel = this.createCanLog(
+        final CanLogFilter canLogFilter = this.createCanLog(
             LoggingLevel.DEBUG,
             b,
             properties(
@@ -143,32 +143,32 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
             )
         );
 
-        canLogCanLoggingLevel.logEnter(LOGGER1);
+        canLogFilter.logEnter(LOGGER1);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.INFO,
                 MESSAGE1
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
-        canLogCanLoggingLevel.logEnter(LOGGER2);
+        canLogFilter.logEnter(LOGGER2);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.INFO,
                 MESSAGE2
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
-        canLogCanLoggingLevel.logEnter(LOGGER3);
+        canLogFilter.logEnter(LOGGER3);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.INFO,
                 MESSAGE3
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
         this.checkEquals(
             "logger1 INFO message1\n" +
@@ -181,7 +181,7 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
     public void testNestedLogEnterLogExit() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogCanLoggingLevel canLogCanLoggingLevel = this.createCanLog(
+        final CanLogFilter canLogFilter = this.createCanLog(
             LoggingLevel.DEBUG,
             b,
             properties(
@@ -191,32 +191,32 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
             )
         );
 
-        canLogCanLoggingLevel.logEnter(LOGGER1);
+        canLogFilter.logEnter(LOGGER1);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.INFO,
                 MESSAGE1
             );
 
-            canLogCanLoggingLevel.logEnter(LOGGER2);
+            canLogFilter.logEnter(LOGGER2);
             {
-                canLogCanLoggingLevel.log(
+                canLogFilter.log(
                     LoggingLevel.INFO,
                     MESSAGE2
                 );
             }
-            canLogCanLoggingLevel.logExit();
+            canLogFilter.logExit();
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
-        canLogCanLoggingLevel.logEnter(LOGGER3);
+        canLogFilter.logEnter(LOGGER3);
         {
-            canLogCanLoggingLevel.log(
+            canLogFilter.log(
                 LoggingLevel.INFO,
                 MESSAGE3
             );
         }
-        canLogCanLoggingLevel.logExit();
+        canLogFilter.logExit();
 
         this.checkEquals(
             "logger1 INFO message1\n" +
@@ -236,7 +236,7 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
     }
 
     @Override
-    public CanLogCanLoggingLevel createCanLog() {
+    public CanLogFilter createCanLog() {
         return this.createCanLog(
             LoggingLevel.DEBUG,
             Printers.sink(LINE_ENDING),
@@ -244,9 +244,9 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
         );
     }
 
-    private CanLogCanLoggingLevel createCanLog(final HasLoggingLevel loggingLevel,
-                                               final StringBuilder b,
-                                               final String properties) {
+    private CanLogFilter createCanLog(final HasLoggingLevel loggingLevel,
+                                      final StringBuilder b,
+                                      final String properties) {
         return this.createCanLog(
             loggingLevel,
             b,
@@ -254,9 +254,9 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
         );
     }
 
-    private CanLogCanLoggingLevel createCanLog(final HasLoggingLevel loggingLevel,
-                                               final StringBuilder b,
-                                               final Properties properties) {
+    private CanLogFilter createCanLog(final HasLoggingLevel loggingLevel,
+                                      final StringBuilder b,
+                                      final Properties properties) {
         return this.createCanLog(
             loggingLevel,
             Printers.stringBuilder(
@@ -267,10 +267,10 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
         );
     }
 
-    private CanLogCanLoggingLevel createCanLog(final HasLoggingLevel loggingLevel,
-                                               final Printer printer,
-                                               final Properties properties) {
-        return CanLogCanLoggingLevel.with(
+    private CanLogFilter createCanLog(final HasLoggingLevel loggingLevel,
+                                      final Printer printer,
+                                      final Properties properties) {
+        return CanLogFilter.with(
             CanLogs.printer(
                 printer
             ),
@@ -288,7 +288,7 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
         final CanLoggingLevel canLoggingLevel = CanLoggingLevels.fake();
 
         this.toStringAndCheck(
-            CanLogCanLoggingLevel.with(
+            CanLogFilter.with(
                 CAN_LOG,
                 canLoggingLevel
             ),
@@ -299,7 +299,7 @@ public final class CanLogCanLoggingLevelTest implements CanLogTesting2<CanLogCan
     // class............................................................................................................
 
     @Override
-    public Class<CanLogCanLoggingLevel> type() {
-        return CanLogCanLoggingLevel.class;
+    public Class<CanLogFilter> type() {
+        return CanLogFilter.class;
     }
 }
