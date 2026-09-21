@@ -22,7 +22,7 @@ import walkingkooka.Cast;
 import java.util.Objects;
 
 /**
- * A {@link LoggingContext} that delegates all log messsages and {@link Throwable} to the given {@link CanLog}.
+ * A {@link LoggingContext} that delegates all log messages and {@link Throwable} to the given {@link CanLog}.
  */
 final class LoggingContextCanLog implements LoggingContext,
     CanLogDelegator {
