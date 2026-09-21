@@ -19,13 +19,13 @@ package walkingkooka.logging;
 
 public interface CanLoggingLevelTesting extends HasLoggingLevelTesting {
 
-    default void loggingLevelForAndCheck(final CanLoggingLevel provider,
+    default void loggingLevelForAndCheck(final CanLoggingLevel can,
                                          final LoggerPath path,
                                          final LoggingLevel expected) {
         this.checkEquals(
             expected,
-            provider.loggingLevelFor(path),
-            "loggingLevelFor " + path
+            can.loggingLevelFor(path),
+            "loggingLevelFor " + path + "\n" + can
         );
     }
 }
