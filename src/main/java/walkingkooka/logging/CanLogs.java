@@ -26,6 +26,17 @@ import walkingkooka.text.printer.Printer;
 public final class CanLogs implements PublicStaticHelper {
 
     /**
+     * {@link CanLogCanLoggingLevel}
+     */
+    public static CanLog canLog(final CanLog canLog,
+                                final CanLoggingLevel canLoggingLevel) {
+        return CanLogCanLoggingLevel.with(
+            canLog,
+            canLoggingLevel
+        );
+    }
+
+    /**
      * {@link FakeCanLog}
      */
     public static FakeCanLog fake() {
