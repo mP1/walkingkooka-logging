@@ -26,18 +26,18 @@ import java.util.Objects;
  * A {@link CanLog} that logs messages to a given {@link CanLog} adding {@link #isLoggingEnabled(LoggingLevel)} guards
  * using the given {@link CanLoggingLevel}.
  */
-final class CanLogCanLoggingLevel implements CanLog {
+final class CanLogFilter implements CanLog {
 
-    static CanLogCanLoggingLevel with(final CanLog canLog,
-                                      final CanLoggingLevel canLoggingLevel) {
-        return new CanLogCanLoggingLevel(
+    static CanLogFilter with(final CanLog canLog,
+                             final CanLoggingLevel canLoggingLevel) {
+        return new CanLogFilter(
             Objects.requireNonNull(canLog, "canLog"),
             Objects.requireNonNull(canLoggingLevel, "canLoggingLevel")
         );
     }
 
-    private CanLogCanLoggingLevel(final CanLog canLog,
-                                  final CanLoggingLevel canLoggingLevel) {
+    private CanLogFilter(final CanLog canLog,
+                         final CanLoggingLevel canLoggingLevel) {
         super();
 
         this.canLog = canLog;
