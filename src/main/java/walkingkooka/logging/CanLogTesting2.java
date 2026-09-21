@@ -26,6 +26,15 @@ public interface CanLogTesting2<C extends CanLog> extends CanLogTesting,
     PackagePrivateClassTesting<C> {
 
     @Test
+    default void testIsLoggingEnabledWithNullLoggingLevelFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createCanLog()
+                .isLoggingEnabled(null)
+        );
+    }
+
+    @Test
     default void testLogEnterWithNullLoggerPathFails() {
         assertThrows(
             NullPointerException.class,
