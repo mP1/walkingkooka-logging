@@ -90,7 +90,7 @@ abstract class CanLogShared<P extends Printer> extends CanLogSharedGwt
         }
     }
 
-    private final P printer;
+    final P printer;
 
     @Override
     public final boolean isLoggingEnabled(final LoggingLevel loggingLevel) {

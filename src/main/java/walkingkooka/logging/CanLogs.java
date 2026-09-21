@@ -18,6 +18,7 @@
 package walkingkooka.logging;
 
 import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.Printer;
 
 /**
@@ -41,6 +42,13 @@ public final class CanLogs implements PublicStaticHelper {
             canLog,
             canLoggingLevel
         );
+    }
+
+    /**
+     * {@link CanLogSharedIndentingPrinter}
+     */
+    public static CanLog indentingPrinter(final IndentingPrinter printer) {
+        return CanLogSharedIndentingPrinter.with(printer);
     }
 
     /**
