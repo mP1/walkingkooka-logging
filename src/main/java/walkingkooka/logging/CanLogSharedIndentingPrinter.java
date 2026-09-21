@@ -1,0 +1,67 @@
+/*
+ * Copyright 2026 Miroslav Pokorny (github.com/mP1)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package walkingkooka.logging;
+
+import walkingkooka.text.printer.IndentingPrinter;
+
+import java.util.Objects;
+
+/**
+ * A {@link CanLog} that does not filter, and prints all messages and dumps the stack trace for any given {@link Throwable}.
+ * The {@link LoggingLevel} is ignored and never printed.
+ * <pre>
+ * DEBUG message 1
+ *   INFO message 2
+ * DEBUG after logExit 3
+ * </pre>
+ */
+final class CanLogSharedIndentingPrinter extends CanLogShared<IndentingPrinter> {
+
+    static CanLogSharedIndentingPrinter with(final IndentingPrinter printer) {
+        return new CanLogSharedIndentingPrinter(
+            Objects.requireNonNull(printer, "printer")
+        );
+    }
+
+    private CanLogSharedIndentingPrinter(final IndentingPrinter printer) {
+        super(printer);
+    }
+
+    // CanLogShared.....................................................................................................
+
+    @Override
+    public void logEnter(final LoggerPath logger) {
+        this.pushLogger(logger);
+        if(this.loggers.size() > 1) {
+            this.printer.indent();
+        }
+    }
+
+    @Override
+    public void logExit() {
+        if(this.loggers.size() > 1) {
+            try {
+                this.printer.outdent();
+            } catch (final RuntimeException ignore) {
+
+            }
+        }
+
+        this.popLogger();
+    }
+}
