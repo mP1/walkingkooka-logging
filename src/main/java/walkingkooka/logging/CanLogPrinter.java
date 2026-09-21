@@ -69,10 +69,10 @@ final class CanLogPrinter extends CanLogPrinterGwt
     private final Stack<LoggerPath> loggers = Stacks.arrayList();
 
     @Override
-    public void log(final LoggingLevel level,
+    public void log(final LoggingLevel loggingLevel,
                     final String message,
                     final Throwable throwable) {
-        Objects.requireNonNull(level, "level");
+        Objects.requireNonNull(loggingLevel, "level");
 
         final Printer printer = this.printer;
 
@@ -85,7 +85,7 @@ final class CanLogPrinter extends CanLogPrinterGwt
             printer.print(" ");
         }
 
-        printer.print(level.name());
+        printer.print(loggingLevel.name());
         printer.print(" ");
         printer.println(message);
 
@@ -109,8 +109,8 @@ final class CanLogPrinter extends CanLogPrinterGwt
     private final Printer printer;
 
     @Override
-    public boolean isLoggingEnabled(final LoggingLevel level) {
-        Objects.requireNonNull(level, "loggingLevel");
+    public boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
+        Objects.requireNonNull(loggingLevel, "loggingLevel");
         return true;
     }
 

@@ -32,21 +32,21 @@ public interface CanLogDelegator extends CanLog {
     }
 
     @Override
-    default void log(final LoggingLevel level,
+    default void log(final LoggingLevel loggingLevel,
                      final String message,
                      final Throwable throwable) {
         this.canLog()
             .log(
-                level,
+                loggingLevel,
                 message,
                 throwable
             );
     }
 
     @Override
-    default boolean isLoggingEnabled(final LoggingLevel level) {
+    default boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
         return this.canLog()
-            .isLoggingEnabled(level);
+            .isLoggingEnabled(loggingLevel);
     }
 
     CanLog canLog();

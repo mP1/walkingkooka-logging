@@ -55,17 +55,17 @@ final class CanLogTee implements CanLog {
     }
 
     @Override
-    public void log(final LoggingLevel level,
+    public void log(final LoggingLevel loggingLevel,
                     final String message,
                     final Throwable throwable) {
-        this.first.log(level, message, throwable);
-        this.second.log(level, message, throwable);
+        this.first.log(loggingLevel, message, throwable);
+        this.second.log(loggingLevel, message, throwable);
     }
 
     @Override
-    public boolean isLoggingEnabled(final LoggingLevel level) {
-        return this.first.isLoggingEnabled(level) ||
-            this.second.isLoggingEnabled(level);
+    public boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
+        return this.first.isLoggingEnabled(loggingLevel) ||
+            this.second.isLoggingEnabled(loggingLevel);
     }
 
     private CanLog first;

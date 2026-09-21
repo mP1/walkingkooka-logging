@@ -144,9 +144,9 @@ final class LoggingContextCanLog implements LoggingContext,
     }
 
     @Override
-    public boolean isLoggingEnabled(final LoggingLevel level) {
+    public boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
         return this.loggingLevel()
-            .isEnabled(level);
+            .isEnabled(loggingLevel);
     }
 
     @Override
@@ -159,13 +159,13 @@ final class LoggingContextCanLog implements LoggingContext,
     // CanLogDelegator..................................................................................................
 
     @Override
-    public void log(final LoggingLevel level,
+    public void log(final LoggingLevel loggingLevel,
                     final String message,
                     final Throwable throwable) {
-        if (this.isLoggingEnabled(level)) {
+        if (this.isLoggingEnabled(loggingLevel)) {
             this.canLog()
                 .log(
-                    level,
+                    loggingLevel,
                     message,
                     throwable
                 );

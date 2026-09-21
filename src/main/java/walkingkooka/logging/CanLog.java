@@ -33,21 +33,21 @@ public interface CanLog {
      */
     void logExit();
 
-    default void log(final LoggingLevel level,
+    default void log(final LoggingLevel loggingLevel,
                      final String message) {
         this.log(
-            level,
+            loggingLevel,
             message,
             null
         );
     }
 
-    void log(final LoggingLevel level,
+    void log(final LoggingLevel loggingLevel,
              final String message,
              final Throwable throwable);
 
     /**
      * Tests if the given {@link LoggingLevel} is enabled.
      */
-    boolean isLoggingEnabled(final LoggingLevel level);
+    boolean isLoggingEnabled(final LoggingLevel loggingLevel);
 }
