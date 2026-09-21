@@ -115,9 +115,9 @@ public interface LoggingContextDelegator extends LoggingContext,
     }
 
     @Override
-    default boolean isLoggingEnabled(final LoggingLevel level) {
+    default boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
         return this.loggingContext()
-            .isLoggingEnabled(level);
+            .isLoggingEnabled(loggingLevel);
     }
 
     @Override

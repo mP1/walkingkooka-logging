@@ -57,21 +57,21 @@ public final class CanLogTeeTest implements CanLogTesting2<CanLogTee>,
         CanLogTee.with(
             new FakeCanLog() {
                 @Override
-                public void log(final LoggingLevel level,
+                public void log(final LoggingLevel loggingLevel,
                                 final String message,
                                 final Throwable throwable) {
                     logged.append(
-                        "" + level + ' ' + message.toLowerCase() + ' ' + throwable + LINE_ENDING
+                        "" + loggingLevel + ' ' + message.toLowerCase() + ' ' + throwable + LINE_ENDING
                     );
                 }
             },
             new FakeCanLog() {
                 @Override
-                public void log(final LoggingLevel level,
+                public void log(final LoggingLevel loggingLevel,
                                 final String message,
                                 final Throwable throwable) {
                     logged.append(
-                        "" + level + ' ' + message.toUpperCase() + ' ' + throwable + LINE_ENDING
+                        "" + loggingLevel + ' ' + message.toUpperCase() + ' ' + throwable + LINE_ENDING
                     );
                 }
             }

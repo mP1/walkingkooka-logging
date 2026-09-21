@@ -41,15 +41,15 @@ final class CanLogNull implements CanLog {
     }
 
     @Override
-    public void log(final LoggingLevel level,
+    public void log(final LoggingLevel loggingLevel,
                     final String message,
                     final Throwable throwable) {
-        Objects.requireNonNull(level, "loggingLevel");
+        Objects.requireNonNull(loggingLevel, "loggingLevel");
     }
 
     @Override
-    public boolean isLoggingEnabled(final LoggingLevel level) {
-        Objects.requireNonNull(level, "loggingLevel");
+    public boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
+        Objects.requireNonNull(loggingLevel, "loggingLevel");
         return false;
     }
 

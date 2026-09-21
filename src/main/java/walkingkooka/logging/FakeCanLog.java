@@ -30,14 +30,14 @@ public class FakeCanLog implements CanLog {
     }
 
     @Override
-    public void log(final LoggingLevel level,
+    public void log(final LoggingLevel loggingLevel,
                     final String message,
                     final Throwable throwable) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean isLoggingEnabled(final LoggingLevel level) {
+    public boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
         throw new UnsupportedOperationException();
     }
 }
