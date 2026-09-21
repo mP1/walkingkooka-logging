@@ -23,7 +23,7 @@ import walkingkooka.text.printer.Printer;
  * A {@link CanLog} that does not filter, and prints all messages and dumps the stack trace for any given {@link Throwable}.
  * The {@link LoggingLevel} is ignored and never printed.
  */
-abstract class CanLogPrinterGwt {
+abstract class CanLogSharedGwt {
 
     void logThrowable(final Throwable throwable,
                       final Printer printer) {
