@@ -51,10 +51,10 @@ public final class CanLogs implements PublicStaticHelper {
     }
 
     /**
-     * {@link CanLogPrinter}
+     * {@link CanLogSharedPrinter}
      */
     public static CanLog printer(final Printer printer) {
-        return CanLogPrinter.with(printer);
+        return CanLogSharedPrinter.with(printer);
     }
 
     /**

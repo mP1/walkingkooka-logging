@@ -18,125 +18,24 @@
 package walkingkooka.logging;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.HashCodeEqualsDefinedTesting2;
-import walkingkooka.ToStringTesting;
-import walkingkooka.text.HasLineEndingTesting;
 import walkingkooka.text.printer.Printer;
 import walkingkooka.text.printer.Printers;
 
-import java.io.PrintWriter;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
-    HashCodeEqualsDefinedTesting2<CanLogPrinter>,
-    HasLineEndingTesting,
-    ToStringTesting<CanLogPrinter> {
+public final class CanLogSharedPrinterTest extends CanLogSharedTestCase<CanLogSharedPrinter, Printer> {
 
     private final static Printer PRINTER = Printers.fake();
-
-    private final static Throwable THROWABLE = new Throwable("throwable message") {
-
-        @Override
-        public void printStackTrace(final PrintWriter printWriter) {
-            printWriter.println("StackTrace etc 111");
-        }
-    };
-
-    @Test
-    public void testWithNullPrinterFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> CanLogPrinter.with(null)
-        );
-    }
-
-    private final static String MESSAGE = "message 111";
-    private final static String MESSAGE2 = "message 222";
-
-    @Test
-    public void testLogWithInfo() {
-        final StringBuilder b = new StringBuilder();
-
-        final CanLogPrinter canLogPrinter = this.createCanLog(b);
-
-        canLogPrinter.log(
-            LoggingLevel.INFO,
-            MESSAGE
-        );
-
-        this.checkEquals(
-            LoggingLevel.INFO + " " + MESSAGE + LINE_ENDING,
-            b.toString()
-        );
-    }
-
-    @Test
-    public void testInfoThrowable() {
-        final StringBuilder b = new StringBuilder();
-
-        final CanLogPrinter canLogPrinter = this.createCanLog(b);
-
-        canLogPrinter.log(
-            LoggingLevel.INFO,
-            MESSAGE,
-            THROWABLE
-        );
-
-        this.checkEquals(
-            "INFO message 111\n" +
-                "StackTrace etc 111\n",
-            b.toString()
-        );
-    }
-
-    @Test
-    public void testLogWithWarn() {
-        final StringBuilder b = new StringBuilder();
-
-        final CanLogPrinter canLogPrinter = this.createCanLog(b);
-
-        canLogPrinter.log(
-            LoggingLevel.WARN,
-            MESSAGE
-        );
-
-        this.checkEquals(
-            LoggingLevel.WARN + " " + MESSAGE + LINE_ENDING,
-            b.toString()
-        );
-    }
-
-    @Test
-    public void testLogWithWarnThrowable() {
-        final StringBuilder b = new StringBuilder();
-
-        final CanLogPrinter canLogPrinter = this.createCanLog(b);
-
-        canLogPrinter.log(
-            LoggingLevel.WARN,
-            MESSAGE,
-            THROWABLE
-        );
-
-        this.checkEquals(
-            "WARN message 111\n" +
-                "StackTrace etc 111\n",
-            b.toString()
-        );
-    }
 
     @Test
     public void testLogEnterAndLog() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter canLogPrinter = this.createCanLog(b);
+        final CanLogSharedPrinter canLogSharedPrinter = this.createCanLog(b);
 
-        canLogPrinter.logEnter(
+        canLogSharedPrinter.logEnter(
             LoggerPath.parse("logger1")
         );
         {
-            canLogPrinter.log(
+            canLogSharedPrinter.log(
                 LoggingLevel.WARN,
                 MESSAGE,
                 THROWABLE
@@ -153,39 +52,39 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogEnterAndLog2() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter canLogPrinter = this.createCanLog(b);
+        final CanLogSharedPrinter canLogSharedPrinter = this.createCanLog(b);
 
-        canLogPrinter.logEnter(
+        canLogSharedPrinter.logEnter(
             LoggerPath.parse("logger1")
         );
         {
-            canLogPrinter.log(
+            canLogSharedPrinter.log(
                 LoggingLevel.DEBUG,
                 MESSAGE,
                 null
             );
 
             {
-                canLogPrinter.logEnter(
+                canLogSharedPrinter.logEnter(
                     LoggerPath.parse("logger2")
                 );
                 {
-                    canLogPrinter.log(
+                    canLogSharedPrinter.log(
                         LoggingLevel.INFO,
                         MESSAGE2,
                         null
                     );
                 }
-                canLogPrinter.logExit();
+                canLogSharedPrinter.logExit();
             }
 
-            canLogPrinter.log(
+            canLogSharedPrinter.log(
                 LoggingLevel.WARN,
                 "message 333",
                 null
             );
         }
-        canLogPrinter.logExit();
+        canLogSharedPrinter.logExit();
 
         this.checkEquals(
             "logger1 DEBUG message 111\n" +
@@ -199,21 +98,21 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogEnterAndLogLogExitLog() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter canLogPrinter = this.createCanLog(b);
+        final CanLogSharedPrinter canLogSharedPrinter = this.createCanLog(b);
 
-        canLogPrinter.logEnter(
+        canLogSharedPrinter.logEnter(
             LoggerPath.parse("logger1")
         );
         {
-            canLogPrinter.log(
+            canLogSharedPrinter.log(
                 LoggingLevel.WARN,
                 MESSAGE,
                 THROWABLE
             );
         }
-        canLogPrinter.logExit();
+        canLogSharedPrinter.logExit();
 
-        canLogPrinter.log(
+        canLogSharedPrinter.log(
             LoggingLevel.DEBUG,
             MESSAGE2
         );
@@ -221,7 +120,7 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         this.checkEquals(
             "logger1 WARN message 111\n" +
                 "StackTrace etc 111\n" +
-            "DEBUG message 222\n",
+                "DEBUG message 222\n",
             b.toString()
         );
     }
@@ -230,15 +129,15 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     public void testLogWithWarnThrowable2() {
         final StringBuilder b = new StringBuilder();
 
-        final CanLogPrinter canLogPrinter = this.createCanLog(b);
+        final CanLogSharedPrinter canLogSharedPrinter = this.createCanLog(b);
 
-        canLogPrinter.log(
+        canLogSharedPrinter.log(
             LoggingLevel.WARN,
             MESSAGE,
             THROWABLE
         );
 
-        canLogPrinter.log(
+        canLogSharedPrinter.log(
             LoggingLevel.ERROR,
             MESSAGE2
         );
@@ -252,13 +151,14 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     }
 
     @Override
-    public CanLogPrinter createCanLog() {
+    public CanLogSharedPrinter createCanLog() {
         return this.createCanLog(
             PRINTER
         );
     }
 
-    private CanLogPrinter createCanLog(final StringBuilder b) {
+    @Override
+    CanLogSharedPrinter createCanLog(final StringBuilder b) {
         return this.createCanLog(
             Printers.stringBuilder(
                 b,
@@ -267,8 +167,9 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
         );
     }
 
-    private CanLogPrinter createCanLog(final Printer printer) {
-        return CanLogPrinter.with(printer);
+    @Override
+    CanLogSharedPrinter createCanLog(final Printer printer) {
+        return CanLogSharedPrinter.with(printer);
     }
 
     // hashCode/equals..................................................................................................
@@ -276,15 +177,10 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     @Test
     public void testEqualsDifferentPrinter() {
         this.checkNotEquals(
-            CanLogPrinter.with(
+            CanLogSharedPrinter.with(
                 Printers.fake()
             )
         );
-    }
-
-    @Override
-    public CanLogPrinter createObject() {
-        return this.createCanLog();
     }
 
     // toString.........................................................................................................
@@ -300,7 +196,7 @@ public final class CanLogPrinterTest implements CanLogTesting2<CanLogPrinter>,
     // class............................................................................................................
 
     @Override
-    public Class<CanLogPrinter> type() {
-        return CanLogPrinter.class;
+    public Class<CanLogSharedPrinter> type() {
+        return CanLogSharedPrinter.class;
     }
 }

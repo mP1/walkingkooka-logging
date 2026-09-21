@@ -26,24 +26,10 @@ import walkingkooka.text.printer.Printer;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/**
- * A {@link CanLog} that does not filter, and prints all messages and dumps the stack trace for any given {@link Throwable}.
- * The {@link LoggingLevel} is ignored and never printed.
- * <pre>
- * DEBUG message 1
- * INFO message 2
- * </pre>
- */
-final class CanLogPrinter extends CanLogPrinterGwt
+abstract class CanLogShared<P extends Printer> extends CanLogSharedGwt
     implements CanLog {
 
-    static CanLogPrinter with(final Printer printer) {
-        return new CanLogPrinter(
-            Objects.requireNonNull(printer, "printer")
-        );
-    }
-
-    private CanLogPrinter(final Printer printer) {
+    CanLogShared(final P printer) {
         super();
 
         this.printer = printer;
@@ -51,27 +37,25 @@ final class CanLogPrinter extends CanLogPrinterGwt
 
     // CanLog...........................................................................................................
 
-    @Override
-    public void logEnter(final LoggerPath logger) {
+   final void pushLogger(final LoggerPath logger) {
         Objects.requireNonNull(logger, "logger");
 
         this.loggers.push(logger);
     }
 
-    @Override
-    public void logExit() {
+    final void popLogger() {
         // NO LOCK!
         if (this.loggers.isNotEmpty()) {
             this.loggers.pop();
         }
     }
 
-    private final Stack<LoggerPath> loggers = Stacks.arrayList();
+    final Stack<LoggerPath> loggers = Stacks.arrayList();
 
     @Override
-    public void log(final LoggingLevel loggingLevel,
-                    final String message,
-                    final Throwable throwable) {
+    public final void log(final LoggingLevel loggingLevel,
+                          final String message,
+                          final Throwable throwable) {
         Objects.requireNonNull(loggingLevel, "level");
 
         final Printer printer = this.printer;
@@ -106,10 +90,10 @@ final class CanLogPrinter extends CanLogPrinterGwt
         }
     }
 
-    private final Printer printer;
+    private final P printer;
 
     @Override
-    public boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
+    public final boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
         Objects.requireNonNull(loggingLevel, "loggingLevel");
         return true;
     }
@@ -117,23 +101,23 @@ final class CanLogPrinter extends CanLogPrinterGwt
     // Object...........................................................................................................
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return this.printer.hashCode();
     }
 
     @Override
-    public boolean equals(final Object other) {
+    public final boolean equals(final Object other) {
         return this == other ||
-            other instanceof CanLogPrinter &&
+            null != other && this.getClass() == other.getClass() &&
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final CanLogPrinter other) {
+    private boolean equals0(final CanLogShared other) {
         return this.printer.equals(other.printer);
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return this.printer.toString();
     }
 }
