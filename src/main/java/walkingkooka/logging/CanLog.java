@@ -45,4 +45,9 @@ public interface CanLog {
     void log(final LoggingLevel level,
              final String message,
              final Throwable throwable);
+
+    /**
+     * Tests if the given {@link LoggingLevel} is enabled.
+     */
+    boolean isLoggingEnabled(final LoggingLevel level);
 }

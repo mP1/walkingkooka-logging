@@ -53,5 +53,14 @@ public interface CanLogTesting2<C extends CanLog> extends CanLogTesting,
         );
     }
 
+    default void isLoggingEnabledAndCheck(final LoggingLevel loggingLevel,
+                                          final boolean expected) {
+        this.isLoggingEnabledAndCheck(
+            this.createCanLog(),
+            loggingLevel,
+            expected
+        );
+    }
+
     C createCanLog();
 }

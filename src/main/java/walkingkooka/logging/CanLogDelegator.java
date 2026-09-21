@@ -43,5 +43,11 @@ public interface CanLogDelegator extends CanLog {
             );
     }
 
+    @Override
+    default boolean isLoggingEnabled(final LoggingLevel level) {
+        return this.canLog()
+            .isLoggingEnabled(level);
+    }
+
     CanLog canLog();
 }

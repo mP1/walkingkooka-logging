@@ -22,4 +22,14 @@ import walkingkooka.test.Testing;
 public interface CanLogTesting extends Testing {
 
     CanLog CAN_LOG = CanLogs.nullCanLog();
+
+    default void isLoggingEnabledAndCheck(final CanLog can,
+                                          final LoggingLevel loggingLevel,
+                                          final boolean expected) {
+        this.checkEquals(
+            expected,
+            can.isLoggingEnabled(loggingLevel),
+            can::toString
+        );
+    }
 }

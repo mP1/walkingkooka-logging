@@ -23,17 +23,6 @@ public interface LoggingContextTesting2<C extends LoggingContext> extends Contex
     CanLogTesting2<C>,
     LoggingContextTesting {
 
-    default void isLoggingEnabledAndCheck(final LoggingLevel loggingLevel,
-                                          final boolean expected) {
-        final C context = this.createContext();
-
-        this.isLoggingEnabledAndCheck(
-            context,
-            loggingLevel,
-            expected
-        );
-    }
-
     default void loggingLevelAndCheck(final LoggingLevel expected) {
         final C context = this.createContext();
 

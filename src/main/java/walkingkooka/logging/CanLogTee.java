@@ -62,6 +62,12 @@ final class CanLogTee implements CanLog {
         this.second.log(level, message, throwable);
     }
 
+    @Override
+    public boolean isLoggingEnabled(final LoggingLevel level) {
+        return this.first.isLoggingEnabled(level) ||
+            this.second.isLoggingEnabled(level);
+    }
+
     private CanLog first;
 
     private CanLog second;

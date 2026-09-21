@@ -93,11 +93,6 @@ public class FakeLoggingContext extends FakeCanLog
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean isLoggingEnabled(final LoggingLevel level) {
-        throw new UnsupportedOperationException();
-    }
-
     @Override 
     public LoggingLevel loggingLevel() {
         throw new UnsupportedOperationException();
