@@ -108,6 +108,12 @@ final class CanLogPrinter extends CanLogPrinterGwt
 
     private final Printer printer;
 
+    @Override
+    public boolean isLoggingEnabled(final LoggingLevel level) {
+        Objects.requireNonNull(level, "loggingLevel");
+        return true;
+    }
+
     // Object...........................................................................................................
 
     @Override

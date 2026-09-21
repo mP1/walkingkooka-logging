@@ -35,4 +35,9 @@ public class FakeCanLog implements CanLog {
                     final Throwable throwable) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public boolean isLoggingEnabled(final LoggingLevel level) {
+        throw new UnsupportedOperationException();
+    }
 }

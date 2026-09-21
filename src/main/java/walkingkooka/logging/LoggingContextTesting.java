@@ -24,14 +24,4 @@ public interface LoggingContextTesting extends CanLogTesting,
         () -> LoggingLevel.NONE,
         CAN_LOG
     );
-
-    default void isLoggingEnabledAndCheck(final LoggingContext context,
-                                          final LoggingLevel loggingLevel,
-                                          final boolean expected) {
-        this.checkEquals(
-            expected,
-            context.isLoggingEnabled(loggingLevel),
-            context::toString
-        );
-    }
 }
