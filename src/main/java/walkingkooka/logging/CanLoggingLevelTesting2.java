@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public interface CanLoggingLevelTesting2<P extends CanLoggingLevel> extends CanLoggingLevelTesting {
 
     @Test
-    default void loggingLevelForWithNullLoggerPathFails() {
+    default void testLoggingLevelForWithNullLoggerPathFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createCanLoggingLevel()
