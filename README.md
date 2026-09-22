@@ -10,6 +10,7 @@
 Defines the core logging abstractions.
 
 - Global and/or cascading [LoggingLevel](https://github.com/mP1/walkingkooka-logging/blob/master/src/main/java/walkingkooka/logging/LoggingLevel.java).
+- Support for changing the global [LoggingLevel](https://github.com/mP1/walkingkooka-logging/blob/master/src/main/java/walkingkooka/logging/LoggingLevel.java) via [EnvironmentContext#setLoggingLevel](https://github.com/mP1/walkingkooka-environment/blob/master/src/main/java/walkingkooka/environment/EnvironmentContext.java)
 - 5 levels of [LoggingLevel](https://github.com/mP1/walkingkooka-logging/blob/master/src/main/java/walkingkooka/logging/LoggingLevel.java).
 - Support for named loggers having individual and different [LoggingLevel](https://github.com/mP1/walkingkooka-logging/blob/master/src/main/java/walkingkooka/logging/LoggingLevel.java)
 - Named loggers defined within a [Properties](https://github.com/mP1/walkingkooka-props/blob/master/src/main/java/walkingkooka/props/Properties.java).
