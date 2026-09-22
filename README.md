@@ -7,7 +7,15 @@
 [![J2CL compatible](https://img.shields.io/badge/J2CL-compatible-brightgreen.svg)](https://github.com/mP1/j2cl-central)
 
 # walkingkooka-logging
-Defines the core logging abstractions 
+Defines the core logging abstractions.
+
+- Global and/or cascading [LoggingLevel](https://github.com/mP1/walkingkooka-logging/blob/master/src/main/java/walkingkooka/logging/LoggingLevel.java).
+- 5 levels of [LoggingLevel](https://github.com/mP1/walkingkooka-logging/blob/master/src/main/java/walkingkooka/logging/LoggingLevel.java).
+- Support for named loggers having individual and different [LoggingLevel](https://github.com/mP1/walkingkooka-logging/blob/master/src/main/java/walkingkooka/logging/LoggingLevel.java)
+- Named loggers defined within a [Properties](https://github.com/mP1/walkingkooka-props/blob/master/src/main/java/walkingkooka/props/Properties.java).
+- Support for different logging configuration per user/session.
+- Support for printing tree (nested) logging messages.
+- [TODO] Support for buffering logging messages which are ignored unless an ERROR is logged.
 
 ## [CanLog](https://github.com/mP1/walkingkooka-logging/blob/master/src/main/java/walkingkooka/logging/CanLog.java)
 
