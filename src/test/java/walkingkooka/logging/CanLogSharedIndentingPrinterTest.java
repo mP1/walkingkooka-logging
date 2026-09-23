@@ -29,6 +29,48 @@ public final class CanLogSharedIndentingPrinterTest extends CanLogSharedTestCase
     private final static IndentingPrinter PRINTER = IndentingPrinters.fake();
 
     @Test
+    public void testLogWithNullMessage() {
+        this.createCanLog(
+            IndentingPrinters.fake()
+        ).log(
+            LoggingLevel.DEBUG,
+            null
+        );
+    }
+
+    @Test
+    public void testLogWithEmptyMessage() {
+        this.createCanLog(
+            IndentingPrinters.fake()
+        ).log(
+            LoggingLevel.DEBUG,
+            null
+        );
+    }
+
+    @Test
+    public void testLogWithNullMessageAndNullThrowable() {
+        this.createCanLog(
+            IndentingPrinters.fake()
+        ).log(
+            LoggingLevel.DEBUG,
+            null,
+            null
+        );
+    }
+
+    @Test
+    public void testLogWithEmptyMessageAndNullThrowable() {
+        this.createCanLog(
+            IndentingPrinters.fake()
+        ).log(
+            LoggingLevel.DEBUG,
+            "",
+            null
+        );
+    }
+    
+    @Test
     public void testLogEnterAndLog() {
         final StringBuilder b = new StringBuilder();
 
