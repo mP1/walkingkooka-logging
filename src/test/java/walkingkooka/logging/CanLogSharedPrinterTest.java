@@ -26,6 +26,48 @@ public final class CanLogSharedPrinterTest extends CanLogSharedTestCase<CanLogSh
     private final static Printer PRINTER = Printers.fake();
 
     @Test
+    public void testLogWithNullMessage() {
+        this.createCanLog(
+            Printers.fake()
+        ).log(
+            LoggingLevel.DEBUG,
+            null
+        );
+    }
+
+    @Test
+    public void testLogWithEmptyMessage() {
+        this.createCanLog(
+            Printers.fake()
+        ).log(
+            LoggingLevel.DEBUG,
+            null
+        );
+    }
+
+    @Test
+    public void testLogWithNullMessageAndNullThrowable() {
+        this.createCanLog(
+            Printers.fake()
+        ).log(
+            LoggingLevel.DEBUG,
+            null,
+            null
+        );
+    }
+
+    @Test
+    public void testLogWithEmptyMessageAndNullThrowable() {
+        this.createCanLog(
+            Printers.fake()
+        ).log(
+            LoggingLevel.DEBUG,
+            "",
+            null
+        );
+    }
+
+    @Test
     public void testLogEnterAndLog() {
         final StringBuilder b = new StringBuilder();
 

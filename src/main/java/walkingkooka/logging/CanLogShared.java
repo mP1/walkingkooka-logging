@@ -21,6 +21,7 @@ import javaemul.internal.annotations.GwtIncompatible;
 import walkingkooka.Cast;
 import walkingkooka.collect.stack.Stack;
 import walkingkooka.collect.stack.Stacks;
+import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.Printer;
 
 import java.io.PrintWriter;
@@ -58,25 +59,32 @@ abstract class CanLogShared<P extends Printer> extends CanLogSharedGwt
                           final Throwable throwable) {
         Objects.requireNonNull(loggingLevel, "level");
 
-        final Printer printer = this.printer;
+        final boolean messagePresent = false == CharSequences.isNullOrEmpty(message);
 
-        // LOGGER1 DEBUG message1
-        // DEBUG message 1
-        if (this.loggers.isNotEmpty()) {
-            printer.print(
-                this.loggers.peek().value()
+        if (messagePresent || null != throwable) {
+            final Printer printer = this.printer;
+
+            // LOGGER1 DEBUG message1
+            // DEBUG message 1
+            if (this.loggers.isNotEmpty()) {
+                printer.print(
+                    this.loggers.peek().value()
+                );
+                printer.print(" ");
+            }
+
+            printer.print(loggingLevel.name());
+
+            if (messagePresent) {
+                printer.print(" ");
+                printer.println(message);
+            }
+
+            this.logThrowable(
+                throwable,
+                printer
             );
-            printer.print(" ");
         }
-
-        printer.print(loggingLevel.name());
-        printer.print(" ");
-        printer.println(message);
-
-        this.logThrowable(
-            throwable,
-            printer
-        );
     }
 
     @Override
