@@ -17,9 +17,9 @@
 
 package walkingkooka.logging;
 
-import walkingkooka.test.Testing;
+import walkingkooka.text.printer.TreePrintableTesting;
 
-public interface CanLogTesting extends Testing {
+public interface CanLogTesting extends TreePrintableTesting {
 
     CanLog CAN_LOG = CanLogs.nullCanLog();
 
