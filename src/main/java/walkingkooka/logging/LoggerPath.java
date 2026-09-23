@@ -27,7 +27,8 @@ import java.util.Optional;
 /**
  * A complete logger path that mimics a {@link PropertiesPath}.
  */
-public final class LoggerPath implements Path<LoggerPath, LoggerName>, Comparable<LoggerPath> {
+public final class LoggerPath implements Path<LoggerPath, LoggerName>, Comparable<LoggerPath>,
+    HasLoggerPath{
 
     /**
      * {@link PathSeparator} instance
@@ -130,4 +131,11 @@ public final class LoggerPath implements Path<LoggerPath, LoggerName>, Comparabl
     }
 
     final PropertiesPath propertiesPath;
+
+    // HasLoggerPath....................................................................................................
+
+    @Override
+    public LoggerPath logger() {
+        return this;
+    }
 }
