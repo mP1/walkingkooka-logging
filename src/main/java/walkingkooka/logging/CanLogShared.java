@@ -17,18 +17,15 @@
 
 package walkingkooka.logging;
 
-import javaemul.internal.annotations.GwtIncompatible;
 import walkingkooka.Cast;
 import walkingkooka.collect.stack.Stack;
 import walkingkooka.collect.stack.Stacks;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.Printer;
 
-import java.io.PrintWriter;
 import java.util.Objects;
 
-abstract class CanLogShared<P extends Printer> extends CanLogSharedGwt
-    implements CanLog {
+abstract class CanLogShared<P extends Printer> implements CanLog {
 
     CanLogShared(final P printer) {
         super();
@@ -80,21 +77,9 @@ abstract class CanLogShared<P extends Printer> extends CanLogSharedGwt
                 printer.println(message);
             }
 
-            this.logThrowable(
-                throwable,
-                printer
-            );
-        }
-    }
-
-    @Override
-    @GwtIncompatible
-    void logThrowable(final Throwable throwable,
-                      final Printer printer) {
-        if (null != throwable) {
-            final PrintWriter printWriter = printer.asPrintWriter();
-            throwable.printStackTrace(printWriter);
-            printWriter.flush();
+            if (null != throwable) {
+                printer.printThrowable(throwable);
+            }
         }
     }
 
