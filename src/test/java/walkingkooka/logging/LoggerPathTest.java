@@ -29,6 +29,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class LoggerPathTest implements PathTesting<LoggerPath, LoggerName>,
+    HasLoggerPathTesting,
     ParseStringTesting<LoggerPath> {
 
     @Test
@@ -125,6 +126,18 @@ public final class LoggerPathTest implements PathTesting<LoggerPath, LoggerName>
     @Override
     public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> expected) {
         return expected;
+    }
+
+    // HasLoggerPath....................................................................................................
+
+    @Test
+    public void testLoggerPath() {
+        final LoggerPath loggerPath = LoggerPath.parse("hello.world");
+
+        this.loggerAndCheck(
+            loggerPath,
+            loggerPath
+        );
     }
 
     // class............................................................................................................
