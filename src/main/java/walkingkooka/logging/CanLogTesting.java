@@ -19,9 +19,24 @@ package walkingkooka.logging;
 
 import walkingkooka.text.printer.TreePrintableTesting;
 
+import java.util.function.Supplier;
+
 public interface CanLogTesting extends TreePrintableTesting {
 
     CanLog CAN_LOG = CanLogs.nullCanLog();
+
+    default <T> void logEnterAndExit(final CanLog canLog,
+                                     final LoggerPath logger,
+                                     final Supplier<T> supplier,
+                                     final T expected) {
+        this.checkEquals(
+            expected,
+            canLog.logEnterAndExit(
+                logger,
+                supplier
+            )
+        );
+    }
 
     default void isLoggingEnabledAndCheck(final CanLog can,
                                           final LoggingLevel loggingLevel,

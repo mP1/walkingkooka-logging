@@ -17,9 +17,45 @@
 
 package walkingkooka.logging;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.PublicClassTesting;
+import walkingkooka.text.HasLineEndingTesting;
+import walkingkooka.text.printer.Printer;
+import walkingkooka.text.printer.Printers;
 
-public final class CanLogTest implements PublicClassTesting<CanLog> {
+public final class CanLogTest implements CanLogTesting,
+    HasLineEndingTesting,
+    PublicClassTesting<CanLog> {
+
+    @Test
+    public void testLogEnterAndExit() {
+        final StringBuilder b = new StringBuilder();
+        final Printer printer = Printers.stringBuilder(
+            b,
+            LINE_ENDING
+        );
+
+        final Object value = 123;
+
+        final CanLog canLog = CanLogs.printer(printer);
+        this.logEnterAndExit(
+            canLog,
+            LoggerPath.parse("testLogger123"),
+            () -> {
+                canLog.log(
+                    LoggingLevel.DEBUG,
+                    "Message123"
+                );
+                return value;
+            },
+            value
+        );
+
+        this.checkEquals(
+            "testLogger123 DEBUG Message123\n",
+            b.toString()
+        );
+    }
 
     // class............................................................................................................
 

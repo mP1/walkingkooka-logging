@@ -97,7 +97,17 @@ public final class CanLogTeeTest implements CanLogTesting2<CanLogTee>,
     public CanLogTee createCanLog() {
         return CanLogTee.with(
             CanLogs.nullCanLog(),
-            CanLogs.fake()
+            new FakeCanLog() {
+                @Override
+                public void logEnter(final LoggerPath logger) {
+                    // nop
+                }
+
+                @Override
+                public void logExit() {
+                    // nop
+                }
+            }
         );
     }
 
