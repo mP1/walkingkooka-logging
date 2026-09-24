@@ -17,10 +17,25 @@
 
 package walkingkooka.logging;
 
+import java.util.function.Supplier;
+
 /**
  * Minimalist interface that supports logging messages if the accompanying {@link LoggingLevel} is enabled.
  */
 public interface CanLog {
+
+    /**
+     * Invokes the given {@link Supplier} surrounded by a {@link #logEnter(LoggerPath)} and {@link #logExit()}
+     */
+    default <T> T logEnterAndExit(final LoggerPath logger,
+                                  final Supplier<T> supplier) {
+        this.logEnter(logger);
+        try {
+            return supplier.get();
+        } finally {
+            this.logExit();
+        }
+    }
 
     /**
      * Starts a new logging scope set to the given {@link LoggerPath}. This will be used to determine the current
