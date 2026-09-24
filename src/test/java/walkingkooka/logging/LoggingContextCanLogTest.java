@@ -20,6 +20,7 @@ package walkingkooka.logging;
 import org.junit.jupiter.api.Test;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
+import walkingkooka.props.Properties;
 import walkingkooka.text.HasLineEndingTesting;
 import walkingkooka.text.printer.Printers;
 
@@ -172,6 +173,37 @@ public final class LoggingContextCanLogTest implements LoggingContextTesting2<Lo
         );
 
         context.warn(MESSAGE);
+    }
+
+    @Test
+    public void testLogChangesWithCanLoggingLevelProperties() {
+        final StringBuilder b = new StringBuilder();
+
+        final LoggingContextCanLog context = LoggingContextCanLog.with(
+            LoggingLevel.DEBUG,
+            CanLogs.filter(
+                CanLogs.printer(
+                    Printers.stringBuilder(
+                        b,
+                        LINE_ENDING
+                    )
+                ),
+                CanLoggingLevels.properties(
+                    Properties.parse("test123=INFO"),
+                    LoggingLevel.DEBUG // twice! YUCK
+                )
+            )
+        );
+
+        context.logEnter(LoggerPath.parse("test123"));
+        context.debug(MESSAGE);
+        context.info("Message22");
+        context.logExit();
+
+        this.checkEquals(
+            "test123 INFO Message22\n",
+            b.toString()
+        );
     }
 
     @Override
