@@ -30,7 +30,7 @@ public final class CanLoggingLevelPropertiesTest implements CanLoggingLevelTesti
     HasPropertiesTesting,
     PackagePrivateClassTesting<CanLoggingLevelProperties>,
     ThrowableTesting,
-    ToStringTesting<CanLoggingLevelProperties> {
+    ToStringTesting {
 
     private final static Properties PROPERTIES = Properties.parse("hello.world=DEBUG\nhello=INFO");
 

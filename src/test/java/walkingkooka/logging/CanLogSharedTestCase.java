@@ -28,7 +28,7 @@ import java.io.PrintWriter;
 public abstract class CanLogSharedTestCase<C extends CanLogShared<P>, P extends Printer> implements CanLogTesting2<C>,
     HashCodeEqualsDefinedTesting2<C>,
     HasLineEndingTesting,
-    ToStringTesting<C> {
+    ToStringTesting {
 
     final static Throwable THROWABLE = new Throwable("throwable message") {
 

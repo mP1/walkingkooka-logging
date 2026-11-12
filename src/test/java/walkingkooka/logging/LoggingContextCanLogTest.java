@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class LoggingContextCanLogTest implements LoggingContextTesting2<LoggingContextCanLog>,
     HasLineEndingTesting,
     HashCodeEqualsDefinedTesting2<LoggingContextCanLog>,
-    ToStringTesting<LoggingContextCanLog> {
+    ToStringTesting {
 
     private final static HasLoggingLevel HAS_LOGGING_LEVEL = () -> LoggingLevel.INFO;
 
