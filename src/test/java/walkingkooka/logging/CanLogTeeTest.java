@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class CanLogTeeTest implements CanLogTesting2<CanLogTee>,
     HasLoggingLevelTesting,
     HasLineEndingTesting,
-    ToStringTesting<CanLogTee> {
+    ToStringTesting {
 
     @Test
     public void testWithNullFirstFails() {

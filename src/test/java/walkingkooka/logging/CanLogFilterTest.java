@@ -26,7 +26,7 @@ import walkingkooka.text.printer.Printers;
 
 public final class CanLogFilterTest implements CanLogTesting2<CanLogFilter>,
     HasLineEndingTesting,
-    ToStringTesting<CanLogFilter> {
+    ToStringTesting {
 
     private final static LoggerPath LOGGER1 = LoggerPath.parse("logger1");
     private final static LoggerPath LOGGER2 = LoggerPath.parse("logger2");
