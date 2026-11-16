@@ -154,7 +154,13 @@ final class LoggingContextCanLog implements LoggingContext,
         return this.loggingLevel.loggingLevel();
     }
 
-    private final HasLoggingLevel loggingLevel;
+    @Override
+    public void setLoggingLevel(final LoggingLevel loggingLevel) {
+        Objects.requireNonNull(loggingLevel, "loggingLevel");
+        this.loggingLevel = loggingLevel;
+    }
+
+    private HasLoggingLevel loggingLevel;
 
     // CanLogDelegator..................................................................................................
 

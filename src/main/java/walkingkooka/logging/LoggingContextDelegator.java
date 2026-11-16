@@ -126,6 +126,12 @@ public interface LoggingContextDelegator extends LoggingContext,
             .loggingLevel();
     }
 
+    @Override
+    default void setLoggingLevel(final LoggingLevel loggingLevel) {
+        this.loggingContext()
+            .setLoggingLevel(loggingLevel);
+    }
+
     LoggingContext loggingContext();
 
     // CanLogDelegator..................................................................................................

@@ -52,4 +52,6 @@ public interface LoggingContext extends Context,
     boolean isErrorEnabled();
 
     boolean isNoneEnabled();
+
+    void setLoggingLevel(final LoggingLevel loggingLevel);
 }
