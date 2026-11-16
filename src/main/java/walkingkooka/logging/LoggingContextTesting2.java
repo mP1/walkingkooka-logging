@@ -17,7 +17,10 @@
 
 package walkingkooka.logging;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.ContextTesting;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface LoggingContextTesting2<C extends LoggingContext> extends ContextTesting<C>,
     CanLogTesting2<C>,
@@ -29,6 +32,15 @@ public interface LoggingContextTesting2<C extends LoggingContext> extends Contex
         this.loggingLevelAndCheck(
             context,
             expected
+        );
+    }
+
+    @Test
+    default void testSetLoggingLevelWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createContext()
+                .setLoggingLevel(null)
         );
     }
 
